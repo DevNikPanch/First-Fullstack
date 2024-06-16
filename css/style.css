@@ -1,0 +1,11 @@
+body {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .01em;
+  overflow: hidden;
+  background: rgb(11, 4, 23);
+  -webkit-text-size-adjust: 100%;
+  font-family: HelveticaNeue, sans-serif;
+  line-height: 1.15;
+  color: white;
+}
