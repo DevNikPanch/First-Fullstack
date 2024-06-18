@@ -9,3 +9,14 @@ body {
   line-height: 1.15;
   color: white;
 }
+
+.icon-svg {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  line-height: 0;
+}
+
+.hover-item:hover {
+  background-color: #12284586;
+}

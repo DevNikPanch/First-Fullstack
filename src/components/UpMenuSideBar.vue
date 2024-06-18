@@ -1,23 +1,5 @@
 <script setup lang="ts">
-
-function showActiveItem(e: Event): void {
-    if (!e.target) return;
-    if (e.target instanceof HTMLElement) {
-        const listItems = document.querySelectorAll<HTMLElement>('.list__item');
-
-        console.log(listItems);
-
-        if (listItems) {
-            listItems.forEach((item: HTMLElement): void => {
-                item.style.backgroundColor = '';
-                console.log('True');
-            })
-        }
-
-        e.target.style.backgroundColor = `#122845`;
-    }
-
-}
+import { showActiveItem } from '../helpers/showActiveItem'
 
 </script>
 <template>
@@ -46,7 +28,7 @@ function showActiveItem(e: Event): void {
     </div>
     <div class="menu-down">
         <ul class="list">
-            <li class="list__item" @click='showActiveItem'>
+            <li class="list__item hover-item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -68,7 +50,7 @@ function showActiveItem(e: Event): void {
                 </div>
                 <div class="list__item-count">0</div>
             </li>
-            <li class="list__item" @click='showActiveItem'>
+            <li class="list__item hover-item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -87,7 +69,7 @@ function showActiveItem(e: Event): void {
                 </div>
                 <div class="list__item-count">0</div>
             </li>
-            <li class="list__item" @click='showActiveItem'>
+            <li class="list__item hover-item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -105,7 +87,7 @@ function showActiveItem(e: Event): void {
                     <span class="list__item-text">Планы</span>
                 </div>
             </li>
-            <li class="list__item" @click='showActiveItem'>
+            <li class="list__item hover-item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -161,7 +143,6 @@ function showActiveItem(e: Event): void {
 
 .menu-down {
     padding: 8px 12px 12px;
-    border-bottom: 1px solid rgba(57, 59, 70, .5);
 }
 
 .list {
@@ -182,14 +163,6 @@ function showActiveItem(e: Event): void {
     border-radius: 5px;
 }
 
-.list__item:hover {
-    background-color: #12284586;
-}
-
-.list__item:target {
-    background-color: #122845;
-}
-
 .list__item-info {
     display: flex;
     align-items: center;
@@ -204,13 +177,6 @@ function showActiveItem(e: Event): void {
     justify-content: center;
     position: relative;
     z-index: 1;
-}
-
-.list__item-img .icon-svg {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    line-height: 0;
 }
 
 .list__item-count {
