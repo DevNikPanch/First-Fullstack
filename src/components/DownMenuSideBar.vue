@@ -116,9 +116,6 @@ import { showActiveItem } from '../helpers/showActiveItem'
 }
 
 .list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
     display: grid;
     grid-template-columns: 1fr;
     grid-row-gap: 4px;
@@ -155,7 +152,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
 
 .list__item-img {
     align-items: center;
-    color: #2ebcff;
+    color: var(--icon-side-bar-color);
     display: flex;
     flex-shrink: 0;
     justify-content: center;

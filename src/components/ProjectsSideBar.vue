@@ -38,7 +38,7 @@
 .btn {
     align-items: center;
     border-radius: 5px;
-    color: #76899b;
+    color: var(--text-gray-color);
     display: flex;
     height: 24px;
     position: relative;
