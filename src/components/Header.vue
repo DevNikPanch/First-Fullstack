@@ -3,7 +3,7 @@
     <div class="header__container">
       <div class="header__container-item"></div>
       <ul class="header__list">
-        <li class="header__list-item hover-item" id="habits">
+        <li class="header__list-item hover-item hover-help-info" id="habits">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 class="injected-svg" data-src="resources/icons/habits_24.svg"
@@ -14,7 +14,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item" id="search">
+        <li class="header__list-item hover-item hover-help-info" id="search">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/search_24.svg"
@@ -25,7 +25,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item" id="date">
+        <li class="header__list-item hover-item hover-help-info" id="date">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/calendar_24.svg"
@@ -36,7 +36,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item" id="filter">
+        <li class="header__list-item hover-item hover-help-info" id="filter">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="injected-svg"
                 data-src="resources/icons/filter_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,7 +46,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item" id="tags">
+        <li class="header__list-item hover-item hover-help-info" id="tags">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/tag_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -56,7 +56,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item non-active" id="break">
+        <li class="header__list-item non-active hover-help-info" id="break">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/check_mode_24.svg"
@@ -67,7 +67,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item non-active" id="zoom">
+        <li class="header__list-item non-active hover-help-info" id="zoom">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/focus_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -77,7 +77,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item header__list-item--active" id="notification">
+        <li class="header__list-item hover-item header__list-item--active hover-help-info" id="notification">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/notification_filled_24.svg"
@@ -91,7 +91,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item" id="pomodoro">
+        <li class="header__list-item hover-item hover-help-info" id="pomodoro">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/timer_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -140,35 +140,6 @@
   padding: 3px 0;
   border-radius: 5px;
   z-index: 1;
-}
-
-.header__list-item:hover::before {
-  content: "";
-  height: 22px;
-  white-space: pre;
-  padding: 0 5px;
-  font-size: 11px;
-  color: #0b0417;
-  text-align: center;
-  background-color: var(--text-gray-color);
-  border-radius: 5px;
-  position: absolute;
-  z-index: 10;
-  right: 0;
-  top: 40px;
-  line-height: 22px;
-  pointer-events: none;
-}
-
-.header__list-item:hover::after {
-  content: "";
-  position: absolute;
-  top: 37px;
-  width: 7px;
-  height: 7px;
-  background-color: var(--text-gray-color);
-  visibility: visible;
-  rotate: 45deg;
 }
 
 .non-active:hover::before {

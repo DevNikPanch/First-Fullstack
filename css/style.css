@@ -43,3 +43,32 @@ ul {
 .non-active {
   opacity: .4;
 }
+
+.hover-help-info:hover::before {
+  content: "";
+  height: 22px;
+  white-space: pre;
+  padding: 0 5px;
+  font-size: 11px;
+  color: #0b0417;
+  text-align: center;
+  background-color: var(--text-gray-color);
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  top: 40px;
+  line-height: 22px;
+  pointer-events: none;
+}
+
+.hover-help-info:hover::after {
+  content: "";
+  position: absolute;
+  top: 37px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--text-gray-color);
+  visibility: visible;
+  rotate: 45deg;
+}
