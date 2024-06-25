@@ -36,6 +36,7 @@ ul {
 
 /* Псевдо-события */
 .hover-item:hover {
+  border-radius: 5px;
   background-color: #12284586;
 }
 
