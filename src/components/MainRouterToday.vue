@@ -47,13 +47,14 @@
                         планирование</div>
                     <button type="button" class="today__empty-btn">Смотреть видео</button>
                 </div>
-                <div class="today__content-drop"></div>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
 .today {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 
@@ -124,6 +125,7 @@
 
 /* Основной контент блока "Сегодня" */
 .today__content {
+    position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -134,6 +136,7 @@
 }
 
 .today__empty {
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -171,8 +174,8 @@
     transition: all .4s ease;
 }
 
-.today__content-drop {
-    flex: 1;
-    height: 100%;
+.today__empty-btn:hover {
+    background: #2384b9;
+    opacity: .75;
 }
 </style>
