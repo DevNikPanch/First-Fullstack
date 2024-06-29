@@ -83,7 +83,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
                         <span class="list__item-text">Корзина</span>
                     </div>
                 </li>
-                <li class="list__item hover-item list__item--last">
+                <li class="list__item hover-item">
                     <div class="list__item-info">
                         <div class="list__item-img">
                             <div class="icon-svg">
@@ -122,6 +122,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
 }
 
 .list__item {
+    position: relative;
     height: 24px;
     padding: 2px 6px 2px 4px;
     display: flex;
@@ -130,12 +131,23 @@ import { showActiveItem } from '../helpers/showActiveItem'
     border-radius: 5px;
 }
 
-.list__item--last {
+.list__item:hover::before {
+    content: "";
+    border-radius: 5px;
+    bottom: 0;
+    left: -4px;
+    position: absolute;
+    right: -4px;
+    top: 0;
+    background-color: #122845b2;
+}
+
+.list__item:last-child {
     margin-top: 22px;
     position: relative;
 }
 
-.list__item--last::after {
+.list__item:last-child::after {
     border-top: 1px solid rgba(57, 59, 70, .5);
     content: "";
     left: -12px;

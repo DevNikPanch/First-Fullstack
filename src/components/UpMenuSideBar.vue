@@ -28,7 +28,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
     </div>
     <div class="menu-down">
         <ul class="list">
-            <li class="list__item hover-item" @click='showActiveItem'>
+            <li class="list__item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -50,7 +50,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
                 </div>
                 <div class="list__item-count">0</div>
             </li>
-            <li class="list__item hover-item" @click='showActiveItem'>
+            <li class="list__item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -69,7 +69,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
                 </div>
                 <div class="list__item-count">0</div>
             </li>
-            <li class="list__item hover-item" @click='showActiveItem'>
+            <li class="list__item" @click='showActiveItem'>
                 <div class="list__item-info">
                     <div class="list__item-img">
                         <div class="icon-svg">
@@ -152,6 +152,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
 }
 
 .list__item {
+    position: relative;
     height: 24px;
     padding: 2px 6px 2px 4px;
     display: flex;
@@ -160,7 +161,19 @@ import { showActiveItem } from '../helpers/showActiveItem'
     border-radius: 5px;
 }
 
+.list__item:hover::before {
+    content: "";
+    border-radius: 5px;
+    bottom: 0;
+    left: -4px;
+    position: absolute;
+    right: -4px;
+    top: 0;
+    background-color: #122845b2;
+}
+
 .list__item-info {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 12px;

@@ -3,7 +3,7 @@
     <div class="header__container">
       <div class="header__container-item"></div>
       <ul class="header__list">
-        <li class="header__list-item hover-item hover-help-info" id="habits">
+        <li class="header__list-item hover-help-info" id="habits">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 class="injected-svg" data-src="resources/icons/habits_24.svg"
@@ -14,7 +14,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item hover-help-info" id="search">
+        <li class="header__list-item hover-help-info" id="search">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/search_24.svg"
@@ -25,7 +25,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item hover-help-info" id="date">
+        <li class="header__list-item hover-help-info" id="date">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/calendar_24.svg"
@@ -36,7 +36,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item hover-help-info" id="filter">
+        <li class="header__list-item hover-help-info" id="filter">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="injected-svg"
                 data-src="resources/icons/filter_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,7 +46,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item hover-help-info" id="tags">
+        <li class="header__list-item hover-help-info" id="tags">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/tag_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -77,7 +77,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item header__list-item--active hover-help-info" id="notification">
+        <li class="header__list-item header__list-item--active hover-help-info" id="notification">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/notification_filled_24.svg"
@@ -91,7 +91,7 @@
               </svg></div>
           </div>
         </li>
-        <li class="header__list-item hover-item hover-help-info" id="pomodoro">
+        <li class="header__list-item hover-help-info" id="pomodoro">
           <div class="icon-svg">
             <div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 class="injected-svg" data-src="resources/icons/timer_24.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -131,15 +131,24 @@
 }
 
 .header__list-item {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  justify-content: center;
   position: relative;
-  margin-right: 16px;
-  padding: 3px 0;
+  margin-right: 10px;
+  padding: 3px;
   border-radius: 5px;
   z-index: 1;
+}
+
+.header__list-item:last-child {
+  margin-right: 13px;
+}
+
+.header__list-item:hover {
+  background-color: #122845b2;
+  border-radius: 5px;
+}
+
+.non-active:hover {
+  background-color: transparent;
 }
 
 .non-active:hover::before {
