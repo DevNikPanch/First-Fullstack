@@ -135,11 +135,11 @@ import { showActiveItem } from '../helpers/showActiveItem'
     content: "";
     border-radius: 5px;
     bottom: 0;
-    left: -4px;
+    left: 0;
     position: absolute;
-    right: -4px;
+    right: 0;
     top: 0;
-    background-color: #122845b2;
+    background-color: #12284591;
 }
 
 .list__item:last-child {

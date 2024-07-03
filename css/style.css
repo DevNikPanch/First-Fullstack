@@ -25,6 +25,11 @@ ul {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 .icon-svg {
   align-items: center;
   display: flex;
@@ -43,7 +48,7 @@ ul {
   left: -6px;
   right: -4px;
   top: 13px;
-  background-color: #12284586;
+  background-color: #12284591;
 }
 
 /* Модификаторы */

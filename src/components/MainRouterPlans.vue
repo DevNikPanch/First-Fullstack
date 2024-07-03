@@ -484,6 +484,10 @@
     unicode-bidi: isolate;
 }
 
+.today-navigation__wrapper:hover {
+    color: #fff;
+}
+
 .today-navigation__switcher {
     display: flex;
     justify-content: start;

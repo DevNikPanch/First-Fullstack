@@ -137,7 +137,6 @@
     color: var(--text-gray-color);
 }
 
-
 #add:hover {
     border-radius: 5px;
     background-color: #122845b2;
