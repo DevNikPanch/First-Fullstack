@@ -1,5 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { showActiveItem } from '../helpers/showActiveItem'
+
+defineProps({
+    subMenuItems: Array<String>
+})
+const isOpenMenu = ref(false);
+
+function showSubMenu(show: boolean) {
+    isOpenMenu.value = show;
+    // const subMenu = document.querySelector('.submenu') as HTMLElement;
+    // if (subMenu) {
+    //     if (show) {
+    //         return subMenu.style.display = 'block'
+    //     }
+    //     subMenu.style.display = 'none'
+    // }
+}
 
 </script>
 <template>
@@ -9,7 +26,8 @@ import { showActiveItem } from '../helpers/showActiveItem'
                 <img src="../../images/sing-logo.png" alt="Logo" class="menu-header__item-logo">
                 <div class="menu-header__item-title">Singularity App</div>
             </div>
-            <div class="menu-header__item-burger" style="position: relative;">
+            <div class="menu-header__item-burger" @click="showSubMenu(true)" v-click-outside="() => showSubMenu(false)"
+                style="position: relative;">
                 <div class="top-menu-burger">
                     <div class="icon-svg more " style="min-height: 24px; min-width: 24px;">
                         <div>
@@ -22,6 +40,27 @@ import { showActiveItem } from '../helpers/showActiveItem'
                             </svg>
                         </div>
                     </div>
+                </div>
+                <div class="submenu" :style="{ 'display': isOpenMenu ? 'block' : 'none' }">
+                    <ul class="submenu__list">
+                        <li v-for="item in subMenuItems" class="submenu__list-item">
+                            <div class="submenu__list-item-text">
+                                <span class="submenu__list-item-label">{{ item }}</span>
+                                <div class="icon-svg" style="min-height: 12px; min-width: 12px;">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                            viewBox="0 0 12 12" fill="none" class="injected-svg"
+                                            data-src="resources/icons/arrow_right_12.svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <path fill="currentColor"
+                                                d="M7.85403 6.35403L7.8265 6.3785L4.85076 9.35403C4.65613 9.54866 4.34059 9.54866 4.14597 9.35403C3.96632 9.17438 3.9525 8.8917 4.10451 8.69619L4.14597 8.64924L6.795 6L4.14597 3.35076C3.95134 3.15613 3.95134 2.84059 4.14597 2.64597C4.32562 2.46632 4.6083 2.4525 4.80381 2.60451L4.85076 2.64597L7.82704 5.62087C7.83627 5.62884 7.84527 5.63721 7.85403 5.64597C7.94386 5.73579 7.99223 5.85138 7.99914 5.96894V6.03106C7.99223 6.14862 7.94386 6.26421 7.85403 6.35403Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -124,6 +163,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
 }
 
 .menu-header__item {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -137,6 +177,7 @@ import { showActiveItem } from '../helpers/showActiveItem'
 }
 
 .menu-header__item-burger {
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -145,6 +186,54 @@ import { showActiveItem } from '../helpers/showActiveItem'
     width: 30px;
     height: 30px;
     padding: 6px 0 0 0;
+}
+
+/* Подменю бургера SideBar */
+
+.submenu {
+    display: none;
+    left: 226px;
+    top: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    position: fixed;
+    z-index: 99999;
+}
+
+.submenu__list {
+    position: absolute;
+    background: #120c1e;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .13);
+}
+
+.submenu__list-item {
+    color: #fff;
+    position: relative;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.submenu__list-item:hover {
+    background-color: #182137;
+}
+
+.submenu__list-item-text {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+    color: inherit;
+    height: 34px;
+    padding: 8px 12px;
+    text-align: left;
+    text-align-last: left;
+    width: 100%;
+}
+
+.submenu__list-item-label {
+    flex-grow: 1;
+    padding-right: 10px;
 }
 
 /* Список верхнего меню SideBar */
