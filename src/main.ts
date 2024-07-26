@@ -1,16 +1,16 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import MainRouterIncoming from './components/MainRouterIncoming.vue';
+import MainRouterIncoming from './components/RouterComponents/MainRouterIncoming.vue';
 import { Directive } from 'vue';
 
 // Маршруты
 const routes = [
     { path: '/', component: MainRouterIncoming },
-    { path: '/today', component: () => import('./components/MainRouterToday.vue') },
+    { path: '/today', component: () => import('./components/RouterComponents/MainRouterToday.vue') },
     {
         path: '/plans',
-        component: () => import('./components/MainRouterPlans.vue'),
+        component: () => import('./components/RouterComponents/MainRouterPlans.vue'),
     },
 ];
 

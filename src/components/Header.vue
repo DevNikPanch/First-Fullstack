@@ -1,4 +1,5 @@
-<script setup lang="ts"></script><template>
+<script setup lang="ts"></script>
+<template>
   <header class="header">
     <div class="header__container">
       <div class="header__container-item"></div>

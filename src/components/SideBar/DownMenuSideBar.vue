@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { showActiveItem } from '../helpers/showActiveItem'
+import { showActiveItem } from '../../helpers/showActiveItem'
 </script>
 <template>
     <div class="side-bar-footer">

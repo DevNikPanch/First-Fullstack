@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Task from '../Task.vue';
 </script>
 <template>
     <div class="incoming">
@@ -49,6 +50,7 @@
                     <div class="incoming__empty-title">Тут пока ничего нет</div>
                     <div class="incoming__empty-subtitle">Нажмите иконку + для создания новой задачи</div>
                 </div>
+                <Task />
                 <div class="incoming__content-drop"></div>
             </div>
         </div>
@@ -139,7 +141,8 @@
 
 .incoming__empty {
     position: relative;
-    display: flex;
+    display: none;
+    /* display: flex; */
     align-items: center;
     flex-direction: column;
     flex-grow: 1;

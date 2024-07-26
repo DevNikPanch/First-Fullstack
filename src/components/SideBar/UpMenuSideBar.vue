@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { showActiveItem } from '../helpers/showActiveItem'
+import { showActiveItem } from '../../helpers/showActiveItem'
 
 defineProps({
     subMenuItems: Array<String>
@@ -9,13 +9,6 @@ const isOpenMenu = ref(false);
 
 function showSubMenu(show: boolean) {
     isOpenMenu.value = show;
-    // const subMenu = document.querySelector('.submenu') as HTMLElement;
-    // if (subMenu) {
-    //     if (show) {
-    //         return subMenu.style.display = 'block'
-    //     }
-    //     subMenu.style.display = 'none'
-    // }
 }
 
 </script>
@@ -23,7 +16,7 @@ function showSubMenu(show: boolean) {
     <div class="menu-header">
         <div class="menu-header__item">
             <div class="menu-header__item-up">
-                <img src="../../images/sing-logo.png" alt="Logo" class="menu-header__item-logo">
+                <img src="../../../images/sing-logo.png" alt="Logo" class="menu-header__item-logo">
                 <div class="menu-header__item-title">Singularity App</div>
             </div>
             <div class="menu-header__item-burger" @click="showSubMenu(true)" v-click-outside="() => showSubMenu(false)"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UpMenuSideBar from './UpMenuSideBar.vue';
-import Projects from './ProjectsSideBar.vue'
+import Projects from '../ProjectsSideBar.vue'
 import DownMenuSideBar from './DownMenuSideBar.vue';
 
 const burgerSubMenuItems = ["Файл", "Правка", "Перейти в раздел", "Вид", "Задачи", "Справка"]
