@@ -2,12 +2,15 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import MainRouterIncoming from './components/RouterComponents/MainRouterIncoming.vue';
-import { Directive } from 'vue';
+import { createPinia } from 'pinia';
 
 // Маршруты
 const routes = [
     { path: '/', component: MainRouterIncoming },
-    { path: '/today', component: () => import('./components/RouterComponents/MainRouterToday.vue') },
+    {
+        path: '/today',
+        component: () => import('./components/RouterComponents/MainRouterToday.vue'),
+    },
     {
         path: '/plans',
         component: () => import('./components/RouterComponents/MainRouterPlans.vue'),
@@ -39,5 +42,6 @@ app.directive('click-outside', {
     },
 });
 app.use(router);
+app.use(createPinia());
 
 app.mount('#app');

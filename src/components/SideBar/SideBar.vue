@@ -3,13 +3,15 @@ import UpMenuSideBar from './UpMenuSideBar.vue';
 import Projects from '../ProjectsSideBar.vue'
 import DownMenuSideBar from './DownMenuSideBar.vue';
 
-const burgerSubMenuItems = ["Файл", "Правка", "Перейти в раздел", "Вид", "Задачи", "Справка"]
+import { useSideBarStore } from '../../stores/sideBarStore';
+
+const sideBarStore = useSideBarStore()
 
 </script>
 <template>
     <div class="side-bar-container">
         <div class="side-bar-container__item">
-            <UpMenuSideBar :subMenuItems=burgerSubMenuItems />
+            <UpMenuSideBar :subMenuItems=sideBarStore.burgerSubMenuItems />
         </div>
         <div class="side-bar-container__item side-bar-container__item--stretch">
             <Projects />
