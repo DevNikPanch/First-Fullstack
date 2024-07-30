@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { showActiveItem } from '../../helpers/showActiveItem'
+import { MenuItem, SidebarItems } from '../../types/sideBarItems';
 import InboxSVG from '../SvgComponents/InboxSVG.vue'
 import StarSVG from '../SvgComponents/StarSVG.vue'
 import CalendarSVG from '../SvgComponents/CalendarSVG.vue'
 
-defineProps({
-    subMenuItems: Array<String>
-})
+const props = defineProps<{
+    subMenuItems: Array<String>,
+    upMenuItems: SidebarItems
+}>()
 
 const isOpenMenu = ref(false);
 
@@ -64,48 +66,21 @@ function showSubMenu(show: boolean) {
     </div>
     <div class="menu-down">
         <ul class="list">
-            <li @click="showActiveItem">
-                <router-link to="/" class="list__item">
+            <li v-for="item in upMenuItems" @click="showActiveItem">
+                <router-link :to="item.link" class="list__item">
                     <div class="list__item-info">
                         <div class="list__item-img">
                             <div class="icon-svg">
                                 <div>
-                                    <InboxSVG />
+                                    <component v-if="item.name == 'Входящие'" :is="InboxSVG" />
+                                    <component v-if="item.name == 'Сегодня'" :is="StarSVG" />
+                                    <component v-if="item.name == 'Планы'" :is="CalendarSVG" />
                                 </div>
                             </div>
                         </div>
-                        <span class="list__item-text">Входящие</span>
+                        <span class="list__item-text">{{ item.name }}</span>
                     </div>
-                    <div class="list__item-count">0</div>
-                </router-link>
-            </li>
-            <li @click="showActiveItem">
-                <router-link to="/today" class="list__item">
-                    <div class="list__item-info">
-                        <div class="list__item-img">
-                            <div class="icon-svg">
-                                <div>
-                                    <StarSVG />
-                                </div>
-                            </div>
-                        </div>
-                        <span class="list__item-text">Сегодня</span>
-                    </div>
-                    <div class="list__item-count">0</div>
-                </router-link>
-            </li>
-            <li @click="showActiveItem">
-                <router-link to="/plans" class="list__item">
-                    <div class="list__item-info">
-                        <div class="list__item-img">
-                            <div class="icon-svg">
-                                <div>
-                                    <CalendarSVG />
-                                </div>
-                            </div>
-                        </div>
-                        <span class="list__item-text">Планы</span>
-                    </div>
+                    <div v-if="item.counter" class="list__item-count">{{ item.count }}</div>
                 </router-link>
             </li>
         </ul>

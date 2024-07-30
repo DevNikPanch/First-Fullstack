@@ -11,7 +11,7 @@ const sideBarStore = useSideBarStore()
 <template>
     <div class="side-bar-container">
         <div class="side-bar-container__item">
-            <UpMenuSideBar :subMenuItems=sideBarStore.burgerSubMenuItems />
+            <UpMenuSideBar :subMenuItems=sideBarStore.burgerSubMenuItems :upMenuItems=sideBarStore.upMenuItems />
         </div>
         <div class="side-bar-container__item side-bar-container__item--stretch">
             <Projects />
