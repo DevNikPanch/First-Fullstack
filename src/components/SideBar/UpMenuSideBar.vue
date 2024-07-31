@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { showActiveItem } from '../../helpers/showActiveItem'
-import { MenuItem, SidebarItems } from '../../types/sideBarItems';
+import { SidebarItems } from '../../types/sideBarItems';
 import InboxSVG from '../SvgComponents/InboxSVG.vue'
 import StarSVG from '../SvgComponents/StarSVG.vue'
 import CalendarSVG from '../SvgComponents/CalendarSVG.vue'
 
-const props = defineProps<{
+defineProps<{
     subMenuItems: Array<String>,
     upMenuItems: SidebarItems
 }>()

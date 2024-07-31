@@ -1,10 +1,15 @@
 <script setup lang="ts">
+
+import { useMainToolBarStore } from '../stores/mainToolBarStore';
+
+const mainToolBarStore = useMainToolBarStore();
+
 </script>
 <template>
     <div class="tool-bar">
         <div class="tool-bar__container">
             <div class="tool-bar__list">
-                <div class="tool-bar__list-item" id="add">
+                <div @click="mainToolBarStore.addTask()" class="tool-bar__list-item" id="add">
                     <div class="icon-svg">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -95,6 +100,10 @@
 </template>
 <style scoped>
 .tool-bar {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: rgb(11, 4, 23);
     z-index: 2;
     box-sizing: border-box;
     pointer-events: none;

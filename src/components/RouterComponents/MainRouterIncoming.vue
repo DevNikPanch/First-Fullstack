@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Task from '../Task.vue';
+import { useMainToolBarStore } from '../../stores/mainToolBarStore';
+
+const mainToolBarStore = useMainToolBarStore();
+
 </script>
 <template>
     <div class="incoming">
@@ -26,7 +31,7 @@ import Task from '../Task.vue';
                         <div class="router-header__title-text">Входящие</div>
                     </div>
                     <div class="router-header__burger">
-                        <div class="router-header__burger-btn-wrp hover-item">
+                        <div class="router-header__burger-btn-wrp">
                             <div class="router-header__burger-btn-sort hover-help-info" id="burger-filter">
                                 <div class="icon-svg">
                                     <div>
@@ -46,11 +51,13 @@ import Task from '../Task.vue';
                 </div>
             </div>
             <div class="incoming__content">
-                <div class="incoming__empty">
+                <div v-if="mainToolBarStore.countTask == 0" class="incoming__empty">
                     <div class="incoming__empty-title">Тут пока ничего нет</div>
                     <div class="incoming__empty-subtitle">Нажмите иконку + для создания новой задачи</div>
                 </div>
-                <Task />
+                <div v-for="index in mainToolBarStore.countTask" :key="index">
+                    <Task />
+                </div>
                 <div class="incoming__content-drop"></div>
             </div>
         </div>
@@ -114,6 +121,17 @@ import Task from '../Task.vue';
     margin-right: 13px;
 }
 
+.router-header__burger-btn-wrp:hover::before {
+    background-color: #12284591;
+    border-radius: 5px;
+    bottom: 2px;
+    content: "";
+    left: 6px;
+    position: absolute;
+    right: 12px;
+    top: 2px;
+}
+
 .router-header__burger-btn-sort {
     display: flex;
     justify-content: center;
@@ -141,8 +159,7 @@ import Task from '../Task.vue';
 
 .incoming__empty {
     position: relative;
-    display: none;
-    /* display: flex; */
+    display: flex;
     align-items: center;
     flex-direction: column;
     flex-grow: 1;
