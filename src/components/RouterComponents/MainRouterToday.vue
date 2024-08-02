@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import Task from '../Task.vue';
+import { useMainToolBarStore } from '../../stores/mainToolBarStore';
+
+const mainToolBarStore = useMainToolBarStore();
 </script>
 <template>
     <div class="today">
@@ -42,10 +46,13 @@
                 </div>
             </div>
             <div class="today__content">
-                <div class="today__empty">
+                <div v-if="mainToolBarStore.countTask == 0" class="today__empty">
                     <div class="today__empty-title">Посмотрите короткое видео, чтобы узнать, с чего начать
                         планирование</div>
                     <button type="button" class="today__empty-btn">Смотреть видео</button>
+                </div>
+                <div v-for="index in mainToolBarStore.countTask" :key="index">
+                    <Task />
                 </div>
             </div>
         </div>
@@ -128,11 +135,26 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 74px - 55px);
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0 20px 0 52px;
     scroll-snap-type: y mandatory;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: #1d2b4d;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .today__empty {
