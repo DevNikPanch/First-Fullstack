@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Task from '../Task.vue';
 import { useMainToolBarStore } from '../../stores/mainToolBarStore';
 
@@ -150,11 +149,26 @@ const mainToolBarStore = useMainToolBarStore();
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100vh - 74px - 55px);
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0 20px 0 52px;
     scroll-snap-type: y mandatory;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: #1d2b4d;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .incoming__empty {
