@@ -4,6 +4,8 @@ import { useMainToolBarStore } from '../../stores/mainToolBarStore';
 
 const mainToolBarStore = useMainToolBarStore();
 
+mainToolBarStore.setOption = 'Incoming'
+
 </script>
 <template>
     <div class="incoming">
@@ -50,11 +52,11 @@ const mainToolBarStore = useMainToolBarStore();
                 </div>
             </div>
             <div class="incoming__content">
-                <div v-if="mainToolBarStore.countTask == 0" class="incoming__empty">
+                <div v-if="mainToolBarStore.countTaskIncoming == 0" class="incoming__empty">
                     <div class="incoming__empty-title">Тут пока ничего нет</div>
                     <div class="incoming__empty-subtitle">Нажмите иконку + для создания новой задачи</div>
                 </div>
-                <div v-for="index in mainToolBarStore.countTask" :key="index">
+                <div v-for="index in mainToolBarStore.countTaskIncoming" :key="index">
                     <Task />
                 </div>
                 <div class="incoming__content-drop"></div>
