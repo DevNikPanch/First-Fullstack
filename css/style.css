@@ -99,3 +99,24 @@ input {
   visibility: visible;
   rotate: 45deg;
 }
+
+
+/* Стилизация EditorJS блока */
+
+.ce-block__content {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+.ce-toolbar__content {
+  display: none;
+}
+
+.ce-popover {
+  display: none;
+}
+
+.cdx-block {
+  padding: 0;
+}

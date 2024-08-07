@@ -1,4 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import EditorJS from '@editorjs/editorjs';
+
+const editorTitle = new EditorJS({
+    holder: 'editorjsTitle',
+    placeholder: 'Новая задача',
+    minHeight: 0,
+    autofocus: true,
+})
+
+const editorSubTitle = new EditorJS({
+    holder: 'editorjsSubTitle',
+    placeholder: 'Заметка',
+    minHeight: 0,
+    autofocus: false,
+})
+
+
+
+</script>
 <template>
     <div class="task">
         <div class="task__container">
@@ -22,12 +41,11 @@
                             </div>
                         </div>
                         <div class="task__title">
-                            <div class="task__title-wrapper">
-                                <input type="text" placeholder="Новая задача" class="task__title-wrapper-input"></input>
+                            <div placeholder="Новая задача" id="editorjsTitle" class="task__title-wrapper-input">
                             </div>
                         </div>
                         <div class="task__note">
-                            <input type="text" placeholder="Заметка" class="task__note-input">
+                            <div id="editorjsSubTitle" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
                     <div class="task__down">
@@ -249,8 +267,13 @@
         </div>
     </div>
 </template>
-<style scoped>
+<style>
 /* Стилизация блоков с задачами */
+
+.task {
+    max-width: calc(100vw - 345px);
+}
+
 .task__container {
     position: relative;
     min-height: 24px;
@@ -285,19 +308,16 @@
 
 .task__title {
     width: 100%;
-    line-height: 18px;
-    padding-top: 3px;
-}
-
-.task__title-wrapper {
     color: var(--text-gray-color);
-    width: 100%;
     z-index: 1;
+    line-height: 18px;
+    padding-top: 1px;
 }
 
 .task__header input {
     width: 100%;
     white-space: pre-wrap;
+    word-break: break-all;
     background: #1c283e;
     border: none;
 }
@@ -308,6 +328,7 @@
 
 .task__title-wrapper-input {
     color: #fff;
+    white-space: pre-line;
 }
 
 .task__note {
@@ -358,6 +379,18 @@
     padding-right: 4px;
     position: relative;
     max-width: calc(100% - 20px);
+    z-index: 10;
+}
+
+.task-project__wrapper:hover::before {
+    content: "";
+    border-radius: 5px;
+    bottom: -2px;
+    left: -4px;
+    position: absolute;
+    right: -4px;
+    top: -2px;
+    background-color: #12284591;
 }
 
 .inbox {
