@@ -270,10 +270,6 @@ const editorSubTitle = new EditorJS({
 <style>
 /* Стилизация блоков с задачами */
 
-.task {
-    max-width: calc(100vw - 345px);
-}
-
 .task__container {
     position: relative;
     min-height: 24px;
@@ -285,6 +281,7 @@ const editorSubTitle = new EditorJS({
     border-radius: 5px;
     margin: 0 -4px;
     padding: 4px 8px 8px 33px;
+    box-sizing: border-box;
 }
 
 .task__form {

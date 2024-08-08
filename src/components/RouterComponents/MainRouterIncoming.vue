@@ -156,6 +156,7 @@ mainToolBarStore.setOption = 'Incoming'
     overflow-y: auto;
     padding: 0 20px 0 52px;
     scroll-snap-type: y mandatory;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {

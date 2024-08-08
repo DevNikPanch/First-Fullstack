@@ -25,7 +25,8 @@ import ToolBar from './components/MainToolBar.vue'
 
 <style scoped>
 .app__container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 15vw 85vw;
 }
 
 .app__container-item--main {
