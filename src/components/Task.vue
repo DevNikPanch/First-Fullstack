@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import EditorJS from '@editorjs/editorjs';
 
+const props = defineProps<{
+    counter: number
+}>()
+
 const editorTitle = new EditorJS({
-    holder: 'editorjsTitle',
+    holder: `editorjsTitle-${props.counter}`,
     placeholder: 'Новая задача',
     minHeight: 0,
     autofocus: true,
 })
 
 const editorSubTitle = new EditorJS({
-    holder: 'editorjsSubTitle',
+    holder: `editorjsSubTitle-${props.counter}`,
     placeholder: 'Заметка',
     minHeight: 0,
     autofocus: false,
@@ -41,11 +45,12 @@ const editorSubTitle = new EditorJS({
                             </div>
                         </div>
                         <div class="task__title">
-                            <div placeholder="Новая задача" id="editorjsTitle" class="task__title-wrapper-input">
+                            <div placeholder="Новая задача" :id="`editorjsTitle-${props.counter}`"
+                                class="task__title-wrapper-input">
                             </div>
                         </div>
                         <div class="task__note">
-                            <div id="editorjsSubTitle" class="task__title-wrapper-input"></div>
+                            <div :id="`editorjsSubTitle-${props.counter}`" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
                     <div class="task__down">
@@ -267,7 +272,7 @@ const editorSubTitle = new EditorJS({
         </div>
     </div>
 </template>
-<style>
+<style scoped>
 /* Стилизация блоков с задачами */
 
 .task__container {

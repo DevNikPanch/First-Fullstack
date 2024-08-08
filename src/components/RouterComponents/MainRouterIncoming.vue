@@ -57,7 +57,7 @@ mainToolBarStore.setOption = 'Incoming'
                     <div class="incoming__empty-subtitle">Нажмите иконку + для создания новой задачи</div>
                 </div>
                 <div v-for="index in mainToolBarStore.countTaskIncoming" :key="index">
-                    <Task />
+                    <Task :counter=index />
                 </div>
                 <div class="incoming__content-drop"></div>
             </div>

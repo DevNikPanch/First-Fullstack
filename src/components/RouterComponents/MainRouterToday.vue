@@ -55,7 +55,7 @@ mainToolBarStore.setOption = 'Today'
                     <button type="button" class="today__empty-btn">Смотреть видео</button>
                 </div>
                 <div v-for="index in mainToolBarStore.countTaskToday" :key="index">
-                    <Task />
+                    <Task :counter=index />
                 </div>
             </div>
         </div>
