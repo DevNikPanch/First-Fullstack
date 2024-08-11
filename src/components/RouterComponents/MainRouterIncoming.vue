@@ -77,6 +77,21 @@ mainToolBarStore.setOption = 'Incoming'
     height: 100%;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background-color: #1d2b4d;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 /* Шапка основного окна */
 .router-header__container {
     height: 28px;

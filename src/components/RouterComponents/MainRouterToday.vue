@@ -120,6 +120,17 @@ mainToolBarStore.setOption = 'Today'
     margin-right: 13px;
 }
 
+.router-header__burger-btn-wrp:hover::before {
+    background-color: #12284591;
+    border-radius: 5px;
+    bottom: 2px;
+    content: "";
+    left: 6px;
+    position: absolute;
+    right: 12px;
+    top: 2px;
+}
+
 .router-header__burger-btn-sort {
     display: flex;
     justify-content: center;
