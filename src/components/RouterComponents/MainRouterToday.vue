@@ -84,7 +84,7 @@ mainToolBarStore.setOption = 'Today'
     position: relative;
     margin-bottom: 8px;
     margin-top: 0;
-    padding: 0 0 0 16px;
+    padding: 0 0 0 6px;
 }
 
 .router-header__title {

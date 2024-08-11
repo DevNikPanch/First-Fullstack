@@ -1,9 +1,34 @@
 <script setup lang="ts">
 import EditorJS from '@editorjs/editorjs';
+import { ref } from 'vue';
 
 const props = defineProps<{
     counter: number
 }>()
+
+const isOpenTask = ref(true);
+
+const isSelected = ref(false);
+const isFirstOpen = ref(true);
+function showTask(show: boolean) {
+
+    if (isFirstOpen.value) {
+        isFirstOpen.value = false;
+        return;
+    }
+
+    if (show == true)
+        isSelected.value = false;
+    isOpenTask.value = show;
+}
+
+function showSelected(show: boolean) {
+    if (isOpenTask.value == true) {
+        isSelected.value = false;
+        return;
+    }
+    isSelected.value = show;
+}
 
 const editorTitle = new EditorJS({
     holder: `editorjsTitle-${props.counter}`,
@@ -19,13 +44,12 @@ const editorSubTitle = new EditorJS({
     autofocus: false,
 })
 
-
-
 </script>
 <template>
-    <div class="task">
+    <div class="task" :class="{ 'selected': isSelected }" @click="showSelected(true)" @dblclick="showTask(true)"
+        v-click-outside="() => { showTask(false); showSelected(false); }">
         <div class="task__container">
-            <div class="task__wrapper">
+            <div class="task__wrapper" :style="{ 'background': isOpenTask ? '#1c283e' : 'none' }">
                 <div class="task__form">
                     <div class="task__header">
                         <div class="check-icon" style="min-height: 24px; min-width: 24px;">
@@ -45,16 +69,15 @@ const editorSubTitle = new EditorJS({
                             </div>
                         </div>
                         <div class="task__title">
-                            <div placeholder="Новая задача" :id="`editorjsTitle-${props.counter}`"
-                                class="task__title-wrapper-input">
+                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input">
                             </div>
                         </div>
-                        <div class="task__note">
+                        <div class="task__note" :style="{ 'display': isOpenTask ? 'block' : 'none' }">
                             <div :id="`editorjsSubTitle-${props.counter}`" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
-                    <div class="task__down">
-                        <div class="task-project">
+                    <div class="task__down" :style="{ 'display': isOpenTask ? 'block' : 'none' }">
+                        <div class=" task-project">
                             <div class="task-project__container">
                                 <div class="task-project__wrapper">
                                     <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
@@ -275,14 +298,29 @@ const editorSubTitle = new EditorJS({
 <style scoped>
 /* Стилизация блоков с задачами */
 
+.task {
+    position: relative;
+}
+
+.task:hover::before {
+    border-radius: 5px;
+    bottom: 0;
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: -6px;
+    top: 0;
+    background-color: #12284591;
+}
+
 .task__container {
     position: relative;
     min-height: 24px;
-    margin: 12px 0;
+    margin: 2px 0;
 }
 
 .task__wrapper {
-    background: #1c283e;
+    /* background: #1c283e; */
     border-radius: 5px;
     margin: 0 -4px;
     padding: 4px 8px 8px 33px;
@@ -477,5 +515,17 @@ const editorSubTitle = new EditorJS({
 
 .task-footer__item-action--last {
     margin-right: 0;
+}
+
+/* Модификатор */
+.selected::after {
+    border-radius: 5px;
+    bottom: 0;
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: -6px;
+    top: 0;
+    background-color: #1d2b4d;
 }
 </style>

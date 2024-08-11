@@ -113,7 +113,7 @@ const mainToolBarStore = useMainToolBarStore();
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 13px 13px 12px;
+    padding: 13px 3px 12px;
     pointer-events: all;
 }
 

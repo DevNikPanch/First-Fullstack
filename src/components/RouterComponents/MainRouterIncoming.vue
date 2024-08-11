@@ -86,7 +86,7 @@ mainToolBarStore.setOption = 'Incoming'
     position: relative;
     margin-bottom: 8px;
     margin-top: 0;
-    padding: 0 0 0 16px;
+    padding: 0 0 0 6px;
 }
 
 .router-header__title {
@@ -149,12 +149,10 @@ mainToolBarStore.setOption = 'Incoming'
 /* Основной контент блока "Входящие" */
 .incoming__content {
     position: relative;
-    display: flex;
-    flex-direction: column;
     height: calc(100vh - 74px - 55px);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0 20px 0 52px;
+    padding: 5px 20px 0 42px;
     scroll-snap-type: y mandatory;
     box-sizing: border-box;
 }
