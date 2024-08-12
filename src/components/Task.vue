@@ -9,32 +9,15 @@ const props = defineProps<{
 const isOpenTask = ref(true);
 
 const isSelected = ref(false);
+
 const isFirstOpen = ref(true);
-function showTask(show: boolean) {
-
-    if (isFirstOpen.value) {
-        isFirstOpen.value = false;
-        return;
-    }
-
-    if (show == true)
-        isSelected.value = false;
-    isOpenTask.value = show;
-}
-
-function showSelected(show: boolean) {
-    if (isOpenTask.value == true) {
-        isSelected.value = false;
-        return;
-    }
-    isSelected.value = show;
-}
 
 const editorTitle = new EditorJS({
     holder: `editorjsTitle-${props.counter}`,
     placeholder: 'Новая задача',
     minHeight: 0,
     autofocus: true,
+    readOnly: false
 })
 
 const editorSubTitle = new EditorJS({
@@ -42,7 +25,30 @@ const editorSubTitle = new EditorJS({
     placeholder: 'Заметка',
     minHeight: 0,
     autofocus: false,
+    readOnly: false
 })
+
+function showTask(show: boolean) {
+
+    if (isFirstOpen.value) {
+        isFirstOpen.value = false;
+        return;
+    }
+
+    if (show === true) {
+        isSelected.value = false;
+    }
+
+    isOpenTask.value = show;
+}
+
+function showSelected(show: boolean) {
+    if (isOpenTask.value === true) {
+        isSelected.value = false;
+        return;
+    }
+    isSelected.value = show;
+}
 
 </script>
 <template>
@@ -430,12 +436,13 @@ const editorSubTitle = new EditorJS({
     position: absolute;
     right: -4px;
     top: -2px;
-    background-color: #12284591;
+    background-color: #182137;
 }
 
 .inbox {
     color: var(--icon-side-bar-color);
     margin-right: 12px;
+    z-index: 2;
 }
 
 .task-project__wrapper-content {

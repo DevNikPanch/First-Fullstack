@@ -131,6 +131,10 @@ import { showActiveItem } from '../../helpers/showActiveItem'
     border-radius: 5px;
 }
 
+.list__item:hover {
+    cursor: pointer;
+}
+
 .list__item:hover::before {
     content: "";
     border-radius: 5px;
@@ -160,6 +164,7 @@ import { showActiveItem } from '../../helpers/showActiveItem'
     display: flex;
     align-items: center;
     gap: 12px;
+    z-index: 2;
 }
 
 .list__item-img {

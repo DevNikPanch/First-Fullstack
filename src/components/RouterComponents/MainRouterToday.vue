@@ -147,13 +147,12 @@ mainToolBarStore.setOption = 'Today'
 /* Основной контент блока "Сегодня" */
 .today__content {
     position: relative;
-    display: flex;
-    flex-direction: column;
     height: calc(100vh - 74px - 55px);
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0 20px 0 52px;
+    padding: 5px 20px 0 42px;
     scroll-snap-type: y mandatory;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
