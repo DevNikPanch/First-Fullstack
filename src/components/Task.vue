@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import EditorJS from '@editorjs/editorjs';
 import { ref } from 'vue';
+import InboxSVG from './SvgComponents/InboxSVG.vue';
+import UnplacedSvg from './SvgComponents/UnplacedSvg.vue';
+import RemoveSvg from './SvgComponents/RemoveSvg.vue';
 
 const props = defineProps<{
     counter: number,
@@ -103,19 +106,7 @@ function showTypesKinds(show: boolean) {
                                     onActive: () => showTypesKinds(true), onUnActive: () => showTypesKinds(false)
                                 }">
                                     <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" class="injected-svg"
-                                                data-src="resources/icons/inbox_24.svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <path fillRule="evenodd" clipRule="evenodd" fill="currentColor"
-                                                    d="M21 19H3C2.44772 19 2 19.4477 2 20C2 20.5523 2.44772 21 3 21H21C21.5523 21 22 20.5523 22 20C22 19.4477 21.5523 19 21 19Z">
-                                                </path>
-                                                <path fillRule="evenodd" clipRule="evenodd" fill="currentColor"
-                                                    d="M5 6C5.55228 6 6 6.44772 6 7C6 7.55228 5.55228 8 5 8H4V15L5.98284 15.0001C5.98855 15 5.99427 15 6 15H20V8H19C18.4477 8 18 7.55228 18 7C18 6.44772 18.4477 6 19 6H21C21.5523 6 22 6.44772 22 7V20C22 20.5523 21.5523 21 21 21C20.4477 21 20 20.5523 20 20V17L6.01716 16.9999C6.01145 17 6.00573 17 6 17H4V20C4 20.5523 3.55228 21 3 21C2.44772 21 2 20.5523 2 20V7C2 6.44772 2.44772 6 3 6H5ZM12 3C12.5523 3 13 3.44772 13 4V10L14.1213 8.87868C14.5118 8.48815 15.145 8.48815 15.5355 8.87868C15.9261 9.2692 15.9261 9.90237 15.5355 10.2929L12.7071 13.1213C12.5569 13.2715 12.3708 13.364 12.1764 13.3986L12.059 13.4125H11.941C11.7051 13.3986 11.4731 13.3016 11.2929 13.1213L8.46447 10.2929C8.07394 9.90237 8.07394 9.2692 8.46447 8.87868C8.85499 8.48815 9.48815 8.48815 9.87868 8.87868L11 10V4C11 3.44772 11.4477 3 12 3Z">
-                                                </path>
-                                            </svg>
-                                        </div>
+                                        <InboxSVG />
                                     </div>
                                     <div class="task-project__wrapper-content">
                                         <span>Входящие</span>
@@ -175,33 +166,15 @@ function showTypesKinds(show: boolean) {
                                     </div>
                                 </div>
                                 <div v-else class="task-project__wrapper">
-                                    <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" class="injected-svg"
-                                                data-src="resources/icons/unplaced_24.svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <path fillRule="evenodd" clipRule="evenodd" fill="currentColor"
-                                                    d="M19.1209 2.7067C19.121 2.70683 19.1212 2.70697 19.1209 2.70751L21.6274 5.2169L21.643 5.23413C21.8613 5.41757 22 5.69259 22 6C22 6.20655 21.9374 6.39848 21.8301 6.55783C21.8006 6.60608 21.7644 6.65119 21.7224 6.69261L19.1213 9.25359C18.7299 9.63894 18.101 9.63649 17.7126 9.24811C17.3166 8.85212 17.3166 8.21895 17.7071 7.82843L18.535 6.99986H16.171L13.166 11.9999L16.171 16.9999H18.586L17.7071 16.1213C17.3166 15.7308 17.3166 15.0976 17.7071 14.7071C18.0971 14.316 18.7302 14.316 19.1208 14.7065V14.7077L21.6481 17.2385C21.8634 17.4219 22 17.695 22 18C22 18.2761 21.8881 18.5261 21.7071 18.7071L21.6651 18.7439L21.5912 18.827L19.1213 21.2548C18.7298 21.6396 18.1013 21.6369 17.7132 21.2487C17.3166 20.8521 17.3166 20.219 17.7071 19.8284L18.535 18.9999L16 19C15.934 19 15.8695 18.9936 15.8071 18.9814C15.403 19.0632 14.9727 18.889 14.7481 18.5152L11.999 13.9409L9.2519 18.5152C9.0447 18.8601 8.66243 19.035 8.28712 18.9946L8.26875 18.996C8.24035 18.9987 8.21183 19 8.1833 19H3C2.44772 19 2 18.5523 2 18C2 17.4477 2.44772 17 3 17L7.828 16.9999L10.833 11.9999L7.828 6.99986L3 7C2.44772 7 2 6.55228 2 6C2 5.44771 2.44772 5 3 5H8.34999L8.37227 4.99991C8.71923 4.99244 9.06036 5.16601 9.2519 5.48479L12 10.0579L14.7481 5.48479C14.9391 5.16694 15.2788 4.99344 15.6247 4.99985L15.6549 5L18.586 4.99986L17.7071 4.12132C17.3166 3.7308 17.3166 3.09763 17.7071 2.70711C18.0972 2.31617 18.7304 2.31617 19.1209 2.7067Z">
-                                                </path>
-                                            </svg>
-                                        </div>
+                                    <div class="icon-svg" style="min-height: 24px; min-width: 24px;">
+                                        <UnplacedSvg />
                                     </div>
                                     <div class="task-project__wrapper-content">
                                         <span>Без проекта</span>
                                     </div>
                                 </div>
                                 <div class="icon-svg remove" style="min-height: 24px; min-width: 24px;">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" class="injected-svg"
-                                            data-src="resources/icons/remove_24.svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <path
-                                                d="M16.733 7.267C17.0616 7.59563 17.0869 8.11272 16.8088 8.47034L16.733 8.55622L13.289 12L16.733 15.4438C17.089 15.7998 17.089 16.377 16.733 16.733C16.4044 17.0616 15.8873 17.0869 15.5297 16.8088L15.4438 16.733L12 13.289L8.55622 16.733C8.20021 17.089 7.62301 17.089 7.267 16.733C6.93838 16.4044 6.91311 15.8873 7.19117 15.5297L7.267 15.4438L10.711 12L7.267 8.55622C6.911 8.20021 6.911 7.62301 7.267 7.267C7.59563 6.93838 8.11272 6.91311 8.47034 7.19117L8.55622 7.267L12 10.711L15.4438 7.267C15.7998 6.911 16.377 6.911 16.733 7.267Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                    </div>
+                                    <RemoveSvg />
                                 </div>
                             </div>
                         </div>
@@ -388,8 +361,6 @@ function showTypesKinds(show: boolean) {
     </div>
 </template>
 <style scoped>
-/* Стилизация блоков с задачами */
-
 .task {
     position: relative;
 }
@@ -412,7 +383,6 @@ function showTypesKinds(show: boolean) {
 }
 
 .task__wrapper {
-    /* background: #1c283e; */
     border-radius: 5px;
     margin: 0 -4px;
     padding: 4px 8px 8px 33px;
