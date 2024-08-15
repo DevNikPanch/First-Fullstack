@@ -25,8 +25,8 @@ function showSubMenu(show: boolean) {
                 <img src="../../../images/sing-logo.png" alt="Logo" class="menu-header__item-logo">
                 <div class="menu-header__item-title">Singularity App</div>
             </div>
-            <div class="menu-header__item-burger" @click="showSubMenu(true)" v-click-outside="() => showSubMenu(false)"
-                style="position: relative;">
+            <div class="menu-header__item-burger" @click="showSubMenu(true)"
+                v-click-in-element="{ onUnActive: () => showSubMenu(false) }" style="position: relative;">
                 <div class="top-menu-burger">
                     <div class="icon-svg more " style="min-height: 24px; min-width: 24px;">
                         <div>
