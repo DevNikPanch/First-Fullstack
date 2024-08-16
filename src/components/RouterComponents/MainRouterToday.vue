@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Task from '../Task.vue';
+import Task from '../TaskComponents/Task.vue';
 import { useMainToolBarStore } from '../../stores/mainToolBarStore';
 
 const mainToolBarStore = useMainToolBarStore();
