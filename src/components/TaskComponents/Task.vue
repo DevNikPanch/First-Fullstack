@@ -2,6 +2,7 @@
 import EditorJS from '@editorjs/editorjs';
 import { ref } from 'vue';
 import TaskMiddlePart from './TaskMiddlePart.vue';
+import TaskFooter from './TaskFooter.vue';
 
 const props = defineProps<{
     counter: number,
@@ -94,6 +95,7 @@ function showSelected(show: boolean) {
                     </div>
                     <TaskMiddlePart :typeIncoming="typeIncoming" :isOpenTask="isOpenTask"
                         :isOpenTypeKinds="isOpenTypeKinds" />
+                    <TaskFooter />
                 </div>
             </div>
         </div>
