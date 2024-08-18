@@ -3,7 +3,7 @@
 import InboxSVG from '../SvgComponents/InboxSVG.vue';
 import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
 import RemoveSvg from '../SvgComponents/RemoveSvg.vue';
-import { ref } from 'vue';
+import { DefineComponent, onActivated, ref } from 'vue';
 
 const props = defineProps<{
     typeIncoming: boolean,
@@ -12,9 +12,14 @@ const props = defineProps<{
 }>()
 
 const checkOpenTypeKinds = ref(props.isOpenTypeKinds)
+const checkTypeIncoming = ref(props.typeIncoming)
 
 function showTypesKinds(show: boolean) {
     checkOpenTypeKinds.value = show;
+}
+
+function switchTypeProject(switcher: boolean) {
+    checkTypeIncoming.value = switcher;
 }
 
 </script>
@@ -23,7 +28,7 @@ function showTypesKinds(show: boolean) {
     <div class="task__middle" :style="{ 'display': isOpenTask ? 'block' : 'none' }">
         <div class=" task-project">
             <div class="task-project__container">
-                <div v-if="typeIncoming === true" class="task-project__wrapper" v-click-in-element="{
+                <div v-if="checkTypeIncoming === true" class="task-project__wrapper" v-click-in-element="{
                     onActive: () => showTypesKinds(true), onUnActive: () => showTypesKinds(false)
                 }">
                     <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
@@ -32,42 +37,48 @@ function showTypesKinds(show: boolean) {
                     <div class="task-project__wrapper-content">
                         <span>Входящие</span>
                     </div>
-                    <div class="project" :style="{ 'display': checkOpenTypeKinds ? 'block' : 'none' }">
-                        <div class="project__wrapper">
-                            <div class="project__move">
-                                <input placeholder="Куда" type="text" class="project__move-inpt">
-                            </div>
-                            <div class="project__types">
-                                <div class="project__type">
-                                    <div class="icon__wrapper">
-                                        <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
-                                            <InboxSVG />
-                                        </div>
-                                    </div>
-                                    <div class="project__type-title">Входящие</div>
-                                </div>
-                                <div class="project__type">
-                                    <div class="icon__wrapper">
-                                        <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
-                                            <UnplacedSvg />
-                                        </div>
-                                    </div>
-                                    <div class="project__type-title">Без проекта</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div v-else class="task-project__wrapper">
-                    <div class="icon-svg" style="min-height: 24px; min-width: 24px;">
+                <div v-else class="task-project__wrapper" v-click-in-element="{
+                    onActive: () => showTypesKinds(true), onUnActive: () => showTypesKinds(false)
+                }">
+                    <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
                         <UnplacedSvg />
                     </div>
                     <div class="task-project__wrapper-content">
                         <span>Без проекта</span>
                     </div>
                 </div>
-                <div class="icon-svg remove" style="min-height: 24px; min-width: 24px;">
+                <div @click="switchTypeProject(false)" class="icon-svg remove"
+                    style="min-height: 24px; min-width: 24px;"
+                    :style="{ 'visibility': checkTypeIncoming ? 'visible' : 'hidden' }">
                     <RemoveSvg />
+                </div>
+                <div class="project" :style="{ 'display': checkOpenTypeKinds ? 'block' : 'none' }">
+                    <div class="project__wrapper">
+                        <div class="project__move">
+                            <input placeholder="Куда" type="text" class="project__move-inpt">
+                        </div>
+                        <div class="project__types">
+                            <div class="project__type"
+                                v-click-in-element="{ onActive: () => { switchTypeProject(true), showTypesKinds(false) } }">
+                                <div class="icon__wrapper">
+                                    <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
+                                        <InboxSVG />
+                                    </div>
+                                </div>
+                                <div class="project__type-title">Входящие</div>
+                            </div>
+                            <div class="project__type"
+                                v-click-in-element="{ onActive: () => { switchTypeProject(false), showTypesKinds(false) } }">
+                                <div class="icon__wrapper">
+                                    <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
+                                        <UnplacedSvg />
+                                    </div>
+                                </div>
+                                <div class="project__type-title">Без проекта</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -148,18 +159,6 @@ function showTypesKinds(show: boolean) {
 
 .remove:hover {
     color: #fff;
-}
-
-/* Модификатор */
-.selected::after {
-    border-radius: 5px;
-    bottom: 0;
-    content: "";
-    left: -4px;
-    position: absolute;
-    right: -6px;
-    top: 0;
-    background-color: #1d2b4d;
 }
 
 /* Блок с выбором типа проекта */

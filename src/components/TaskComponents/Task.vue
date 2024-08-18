@@ -95,13 +95,26 @@ function showSelected(show: boolean) {
                     </div>
                     <TaskMiddlePart :typeIncoming="typeIncoming" :isOpenTask="isOpenTask"
                         :isOpenTypeKinds="isOpenTypeKinds" />
-                    <TaskFooter />
+                    <TaskFooter :style="{ 'display': isOpenTask ? 'block' : 'none' }" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <style scoped>
+/* Модификатор */
+.selected::after {
+    border-radius: 5px;
+    bottom: 0;
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: -6px;
+    top: 0;
+    background-color: #1d2b4d;
+}
+
+
 .task {
     position: relative;
 }
