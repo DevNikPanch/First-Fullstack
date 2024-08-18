@@ -3,6 +3,8 @@ import EditorJS from '@editorjs/editorjs';
 import { ref } from 'vue';
 import TaskMiddlePart from './TaskMiddlePart.vue';
 import TaskFooter from './TaskFooter.vue';
+import CheckEmptySVG from './TaskSVG/CheckEmptySVG.vue';
+import CheckDoneSVG from './TaskSVG/CheckDoneSVG.vue';
 
 const props = defineProps<{
     counter: number,
@@ -20,6 +22,9 @@ const isFirstOpen = ref(true);
 
 // Флаг для проверки открытия видов типов
 const isOpenTypeKinds = ref(false);
+
+// Флаг для проверки выполнена ли задача
+const isCheckTask = ref(false);
 
 const editorTitle = new EditorJS({
     holder: `editorjsTitle-${props.counter}`,
@@ -59,6 +64,11 @@ function showSelected(show: boolean) {
     isSelected.value = show;
 }
 
+function checkTask() {
+    debugger
+    isCheckTask.value = !isCheckTask.value;
+}
+
 </script>
 <template>
     <div class="task" :class="{ 'selected': isSelected }" @click="showSelected(true)" @dblclick="showTask(true)"
@@ -66,22 +76,20 @@ function showSelected(show: boolean) {
             onUnActive: () => { showTask(false); showSelected(false); }
         }">
         <div class="task__container">
-            <div class="task__wrapper" :style="{ 'background': isOpenTask ? '#1c283e' : 'none' }">
+            <div class=" task__wrapper" :style="{ 'background': isOpenTask ? '#1c283e' : 'none' }">
                 <div class="task__form">
                     <div class="task__header">
                         <div class="check-icon" style="min-height: 24px; min-width: 24px;">
-                            <div class="check-border">
+                            <div class="check-border" @click="checkTask()">
                                 <div class="icon-svg">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" class="injected-svg"
-                                            data-src="resources/icons/check_empty_24.svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <path fillRule="evenodd" clipRule="evenodd"
-                                                d="M19 5V19H5V5H19ZM19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                    </div>
+                                    <CheckEmptySVG />
+                                </div>
+                            </div>
+                            <div class="check-inner-elem">
+                                <div class="icon-svg check-done" @click="checkTask()"
+                                    style="min-height: 24px; min-width: 24px;"
+                                    :style="{ 'display': isCheckTask ? 'flex' : 'none' }">
+                                    <CheckDoneSVG />
                                 </div>
                             </div>
                         </div>
@@ -113,7 +121,6 @@ function showSelected(show: boolean) {
     top: 0;
     background-color: #1d2b4d;
 }
-
 
 .task {
     position: relative;
@@ -160,6 +167,7 @@ function showSelected(show: boolean) {
     color: var(--text-gray-color);
     flex-grow: 0;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .task__title {
@@ -205,5 +213,18 @@ function showSelected(show: boolean) {
 
 .task__note-input::placeholder {
     font-size: 12px;
+}
+
+.check-inner-elem {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.check-inner-elem .icon-svg {
+    display: none;
 }
 </style>
