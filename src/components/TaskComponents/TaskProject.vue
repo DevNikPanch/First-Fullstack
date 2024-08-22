@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useTaskStore } from '../../stores/taskStore';
 import InboxSVG from '../SvgComponents/InboxSVG.vue';
 import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
@@ -8,10 +9,11 @@ const props = defineProps<{
 }>()
 
 const taskStore = useTaskStore();
+
 </script>
 <template>
     <div class="project">
-        <div class="project__wrapper">
+        <div class=" project__wrapper">
             <div class="project__move">
                 <input placeholder="Куда" type="text" class="project__move-inpt">
             </div>
@@ -29,7 +31,7 @@ const taskStore = useTaskStore();
                     <div class="project__type-title">Входящие</div>
                 </div>
                 <div class="project__type"
-                    v-click-in-element="{ onActive: () => { taskStore.switchTypeProject(props.counter, true), taskStore.showTypesKinds(props.counter, false) } }">
+                    v-click-in-element="{ onActive: () => { taskStore.switchTypeProject(props.counter, false), taskStore.showTypesKinds(props.counter, false) } }">
                     <div class="icon__wrapper">
                         <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
                             <UnplacedSvg />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { showActiveItem } from '../../helpers/showActiveItem'
-import { SidebarItems } from '../../types/sideBarItems';
+import { SidebarItems } from '../../types/sideBarItems.types';
 import InboxSVG from '../SvgComponents/InboxSVG.vue'
 import StarSVG from '../SvgComponents/StarSVG.vue'
 import CalendarSVG from '../SvgComponents/CalendarSVG.vue'

@@ -61,8 +61,7 @@ const editorSubTitle = new EditorJS({
                             </div>
                         </div>
                         <div class="task__title">
-                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input"> {{
-                                taskData?.isSelected }}
+                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input">
                             </div>
                         </div>
                         <div class="task__note" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }">

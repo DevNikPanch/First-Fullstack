@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { SidebarItems } from '../types/sideBarItems';
+import { SidebarItems } from '../types/sideBarItems.types';
 
 export const useSideBarStore = defineStore('sideBarStore', () => {
     const burgerSubMenuItems: string[] = [
