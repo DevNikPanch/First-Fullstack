@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import Task from '../TaskComponents/Task.vue';
-import { useMainToolBarStore } from '../../stores/mainToolBarStore';
+import { useTaskStore } from '../../stores/taskStore';
 
-const mainToolBarStore = useMainToolBarStore();
-
-mainToolBarStore.setOption = 'Today'
+const taskStore = useTaskStore();
 
 </script>
 <template>
@@ -49,12 +47,12 @@ mainToolBarStore.setOption = 'Today'
                 </div>
             </div>
             <div class="today__content">
-                <div v-if="mainToolBarStore.countTaskToday == 0" class="today__empty">
+                <div v-if="taskStore.countTasks == 0" class="today__empty">
                     <div class="today__empty-title">Посмотрите короткое видео, чтобы узнать, с чего начать
                         планирование</div>
                     <button type="button" class="today__empty-btn">Смотреть видео</button>
                 </div>
-                <div v-for="index in mainToolBarStore.countTaskToday" :key="index">
+                <div v-for="index in taskStore.countTasks" :key="index">
                     <Task :counter=index :typeIncoming=false />
                 </div>
             </div>

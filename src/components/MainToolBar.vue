@@ -1,15 +1,14 @@
 <script setup lang="ts">
+import { useTaskStore } from '../stores/taskStore';
 
-import { useMainToolBarStore } from '../stores/mainToolBarStore';
-
-const mainToolBarStore = useMainToolBarStore();
+const taskStore = useTaskStore();
 
 </script>
 <template>
     <div class="tool-bar">
         <div class="tool-bar__container">
             <div class="tool-bar__list">
-                <div @click="mainToolBarStore.addTask()" class="tool-bar__list-item" id="add">
+                <div @click="taskStore.addTask()" class="tool-bar__list-item" id="add">
                     <div class="icon-svg">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

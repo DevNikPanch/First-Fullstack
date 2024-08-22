@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import Task from '../TaskComponents/Task.vue';
-import { useMainToolBarStore } from '../../stores/mainToolBarStore';
+import { useTaskStore } from '../../stores/taskStore';
 import InboxSVG from '../SvgComponents/InboxSVG.vue';
 
-const mainToolBarStore = useMainToolBarStore();
-
-mainToolBarStore.setOption = 'Incoming'
+const taskStore = useTaskStore();
 
 </script>
 <template>
@@ -42,11 +40,11 @@ mainToolBarStore.setOption = 'Incoming'
                 </div>
             </div>
             <div class="incoming__content">
-                <div v-if="mainToolBarStore.countTaskIncoming == 0" class="incoming__empty">
+                <div v-if="taskStore.countTasks == 0" class="incoming__empty">
                     <div class="incoming__empty-title">Тут пока ничего нет</div>
                     <div class="incoming__empty-subtitle">Нажмите иконку + для создания новой задачи</div>
                 </div>
-                <div v-for="index in mainToolBarStore.countTaskIncoming" :key="index">
+                <div v-for="index in taskStore.countTasks" :key="index">
                     <Task :counter=index :typeIncoming=true />
                 </div>
                 <div class="incoming__content-drop"></div>

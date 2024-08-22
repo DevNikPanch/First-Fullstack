@@ -1,30 +1,23 @@
 <script setup lang="ts">
-import EditorJS from '@editorjs/editorjs';
-import { ref } from 'vue';
+import EditorJS from '@editorjs/editorjs';;
 import TaskMiddlePart from './TaskMiddlePart.vue';
 import TaskFooter from './TaskFooter.vue';
 import CheckEmptySVG from './TaskSVG/CheckEmptySVG.vue';
 import CheckDoneSVG from './TaskSVG/CheckDoneSVG.vue';
+import { useTaskStore } from '../../stores/taskStore';
+import { computed } from 'vue';
+
 
 const props = defineProps<{
     counter: number,
     typeIncoming: boolean
 }>()
 
-// Флаг для проверки на открытие таски
-const isOpenTask = ref(true);
+const taskStore = useTaskStore();
 
-// Флаг для проверки выбора элемента
-const isSelected = ref(false);
-
-// Флаг для проверки на первое открытие
-const isFirstOpen = ref(true);
-
-// Флаг для проверки открытия видов типов
-const isOpenTypeKinds = ref(false);
-
-// Флаг для проверки выполнена ли задача
-const isCheckTask = ref(false);
+const taskData = computed(() => {
+    return taskStore.taskList.get(props.counter)
+});
 
 const editorTitle = new EditorJS({
     holder: `editorjsTitle-${props.counter}`,
@@ -42,68 +35,42 @@ const editorSubTitle = new EditorJS({
     readOnly: false
 })
 
-function showTask(show: boolean) {
-
-    if (isFirstOpen.value) {
-        isFirstOpen.value = false;
-        return;
-    }
-
-    if (show === true) {
-        isSelected.value = false;
-    }
-
-    isOpenTask.value = show;
-}
-
-function showSelected(show: boolean) {
-    if (isOpenTask.value === true) {
-        isSelected.value = false;
-        return;
-    }
-    isSelected.value = show;
-}
-
-function checkTask() {
-    debugger
-    isCheckTask.value = !isCheckTask.value;
-}
-
 </script>
 <template>
-    <div class="task" :class="{ 'selected': isSelected }" @click="showSelected(true)" @dblclick="showTask(true)"
+    <div class="task" :class="{ 'selected': taskData?.isSelected }" @dblclick="taskStore.showTask(props.counter, true)"
         v-click-in-element="{
-            onUnActive: () => { showTask(false); showSelected(false); }
+            onActive: () => taskStore.showSelected(props.counter, true),
+            onUnActive: () => { taskStore.showTask(props.counter, false); taskStore.showSelected(props.counter, false); }
         }">
         <div class="task__container">
-            <div class=" task__wrapper" :style="{ 'background': isOpenTask ? '#1c283e' : 'none' }">
+            <div class=" task__wrapper" :style="{ 'background': taskData?.isOpenTask ? '#1c283e' : 'none' }">
                 <div class="task__form">
                     <div class="task__header">
                         <div class="check-icon" style="min-height: 24px; min-width: 24px;">
-                            <div class="check-border" @click="checkTask()">
+                            <div class="check-border" @click="taskStore.checkTask(props.counter)">
                                 <div class="icon-svg">
                                     <CheckEmptySVG />
                                 </div>
                             </div>
                             <div class="check-inner-elem">
-                                <div class="icon-svg check-done" @click="checkTask()"
+                                <div class="icon-svg check-done" @click="taskStore.checkTask(props.counter)"
                                     style="min-height: 24px; min-width: 24px;"
-                                    :style="{ 'display': isCheckTask ? 'flex' : 'none' }">
+                                    :style="{ 'display': taskData?.isCheckTask ? 'flex' : 'none' }">
                                     <CheckDoneSVG />
                                 </div>
                             </div>
                         </div>
                         <div class="task__title">
-                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input">
+                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input"> {{
+                                taskData?.isSelected }}
                             </div>
                         </div>
-                        <div class="task__note" :style="{ 'display': isOpenTask ? 'block' : 'none' }">
+                        <div class="task__note" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }">
                             <div :id="`editorjsSubTitle-${props.counter}`" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
-                    <TaskMiddlePart :typeIncoming="typeIncoming" :isOpenTask="isOpenTask"
-                        :isOpenTypeKinds="isOpenTypeKinds" />
-                    <TaskFooter :style="{ 'display': isOpenTask ? 'block' : 'none' }" />
+                    <TaskMiddlePart :task="taskData!" />
+                    <TaskFooter :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
                 </div>
             </div>
         </div>
