@@ -69,7 +69,7 @@ const editorSubTitle = new EditorJS({
                         </div>
                     </div>
                     <TaskMiddlePart :task="taskData!" />
-                    <TaskFooter :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
+                    <TaskFooter :task="taskData!" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
                 </div>
             </div>
         </div>

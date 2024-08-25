@@ -6,6 +6,7 @@ export interface TaskData {
     isCheckTask: boolean;
     checkTypeIncoming: boolean;
     checkOpenTypeKinds: boolean;
+    isOpenTypeKindsFooter: boolean;
     date?: Date;
     isExpired?: boolean;
 }

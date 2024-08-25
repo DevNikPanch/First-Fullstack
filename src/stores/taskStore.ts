@@ -24,6 +24,7 @@ export const useTaskStore = defineStore('taskStore', () => {
             isCheckTask: false,
             checkTypeIncoming: true,
             checkOpenTypeKinds: false,
+            isOpenTypeKindsFooter: false,
         });
         return countTasks.value;
     };
@@ -79,6 +80,19 @@ export const useTaskStore = defineStore('taskStore', () => {
         });
     }
 
+    // Функция открытия и закрытия выбора типов подвала таски
+    function showTypesKindsFooter(taskId: number, show: boolean) {
+        const taskData = taskList.get(taskId);
+        if (taskData === undefined) return;
+
+        debugger;
+
+        taskList.set(taskId, {
+            ...taskData,
+            isOpenTypeKindsFooter: show,
+        });
+    }
+
     // Функция смена типа проекта
     function switchTypeProject(taskId: number, switcher: boolean) {
         const taskData = taskList.get(taskId);
@@ -98,6 +112,7 @@ export const useTaskStore = defineStore('taskStore', () => {
         showSelected,
         checkTask,
         showTypesKinds,
+        showTypesKindsFooter,
         switchTypeProject,
     };
 });

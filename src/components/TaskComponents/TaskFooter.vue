@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import { useTaskStore } from '../../stores/taskStore';
+import { TaskData } from '../../types/taskData.types';
+import TaskProject from './TaskProject.vue';
+
+const props = defineProps<{
+    task: TaskData,
+}>()
+
+const taskStore = useTaskStore();
+
 </script>
 <template>
     <div class="task-footer">
@@ -17,8 +27,8 @@
                 </div>
             </div>
             <div class="task-footer__item task-footer__item--0">
-                <div class="task-footer__item-action">
-                    <div class="icon-svg calendar" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="calendar">
+                    <div class="icon-svg calendar " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/calendar_16.svg"
@@ -30,8 +40,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action">
-                    <div class="icon-svg repeat" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="repeat">
+                    <div class="icon-svg repeat " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/repeat_16.svg"
@@ -43,8 +53,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action task-footer__item-action--last">
-                    <div class="icon-svg timer" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action task-footer__item-action--last hover-help-info" id="timer">
+                    <div class="icon-svg timer " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/timer_16.svg"
@@ -58,8 +68,8 @@
                 </div>
             </div>
             <div class="task-footer__item task-footer__item--1">
-                <div class="task-footer__item-action">
-                    <div class="icon-svg priority" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="priority">
+                    <div class="icon-svg priority " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/priority_16.svg"
@@ -76,8 +86,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action">
-                    <div class="icon-svg pin" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="pin">
+                    <div class="icon-svg pin " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/pin_16.svg"
@@ -89,8 +99,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action task-footer__item-action--last">
-                    <div class="icon-svg deadline" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action task-footer__item-action--last hover-help-info" id="deadline">
+                    <div class="icon-svg deadline " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/deadline_16.svg"
@@ -104,8 +114,11 @@
                 </div>
             </div>
             <div class="task-footer__item task-footer__item--2">
-                <div class="task-footer__item-action">
-                    <div class="icon-svg mover" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="mover" v-click-in-element="{
+                    onActive: () => taskStore.showTypesKindsFooter(task.taskId, true),
+                    onUnActive: () => taskStore.showTypesKindsFooter(task.taskId, false)
+                }">
+                    <div class="icon-svg mover " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/mover_16.svg"
@@ -117,8 +130,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action">
-                    <div class="icon-svg tag" style="min-height: 16px; min-width: 16px;">
+                <TaskProject :counter="task.taskId"
+                    :style="{ 'display': task.isOpenTypeKindsFooter ? 'block' : 'none' }" />
+                <div class="task-footer__item-action hover-help-info" id="tag">
+                    <div class="icon-svg tag " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/tag_16.svg"
@@ -137,8 +152,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action">
-                    <div class="icon-svg checklist" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action hover-help-info" id="checklist">
+                    <div class="icon-svg checklist " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/checklist_16.svg"
@@ -150,8 +165,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="task-footer__item-action task-footer__item-action--last">
-                    <div class="icon-svg file" style="min-height: 16px; min-width: 16px;">
+                <div class="task-footer__item-action task-footer__item-action--last hover-help-info" id="file">
+                    <div class="icon-svg file " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/file_16.svg"
@@ -172,7 +187,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 12px -8px 0 0;
+    margin: 12px -8px 0 7px;
 }
 
 .task-footer__container {
@@ -194,11 +209,31 @@
     position: relative;
 }
 
+.task-footer__more:hover::before {
+    border-radius: 5px;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #182137;
+}
+
+.task-footer__more:hover svg {
+    color: var(--icon-side-bar-color);
+}
+
 .task-footer svg {
     color: var(--text-gray-color);
 }
 
+.icon-svg {
+    z-index: 10;
+}
+
 .task-footer__item {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -217,7 +252,56 @@
     width: 24px;
 }
 
+.task-footer__item-action:hover {
+    border-radius: 5px;
+    background-color: #182137;
+}
+
+.task-footer__item-action:hover svg {
+    color: var(--icon-side-bar-color);
+}
+
 .task-footer__item-action--last {
     margin-right: 0;
+}
+
+#calendar:hover::before {
+    content: 'Календарь';
+}
+
+#repeat:hover::before {
+    content: 'Повторять задачу';
+}
+
+#timer:hover::before {
+    content: 'Помодоро';
+}
+
+#priority:hover::before {
+    content: 'Высокий приоритет';
+}
+
+#pin:hover::before {
+    content: 'Закрепить';
+}
+
+#deadline:hover::before {
+    content: 'Крайний срок';
+}
+
+#mover:hover::before {
+    content: 'Изменить проект';
+}
+
+#tag:hover::before {
+    content: 'Тэги';
+}
+
+#checklist:hover::before {
+    content: 'Чек-лист';
+}
+
+#file:hover::before {
+    content: 'Прикрепить файл';
 }
 </style>

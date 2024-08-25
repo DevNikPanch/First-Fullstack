@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useTaskStore } from '../../stores/taskStore';
 import InboxSVG from '../SvgComponents/InboxSVG.vue';
 import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
@@ -20,7 +19,8 @@ const taskStore = useTaskStore();
             <div class="project__types">
                 <div class="project__type" v-click-in-element="{
                     onActive: () => {
-                        taskStore.switchTypeProject(props.counter, true), taskStore.showTypesKinds(props.counter, false)
+                        taskStore.switchTypeProject(props.counter, true),
+                            taskStore.showTypesKinds(props.counter, false), taskStore.showTypesKindsFooter(props.counter, false)
                     }
                 }">
                     <div class="icon__wrapper">
@@ -30,14 +30,20 @@ const taskStore = useTaskStore();
                     </div>
                     <div class="project__type-title">Входящие</div>
                 </div>
-                <div class="project__type"
-                    v-click-in-element="{ onActive: () => { taskStore.switchTypeProject(props.counter, false), taskStore.showTypesKinds(props.counter, false) } }">
-                    <div class="icon__wrapper">
-                        <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
-                            <UnplacedSvg />
+                <div class="project__type" v-click-in-element="{
+                    onActive: () => {
+                        taskStore.switchTypeProject(props.counter, false),
+                            taskStore.showTypesKinds(props.counter, false), taskStore.showTypesKindsFooter(props.counter, false)
+                    }
+                }">
+                    <div class="project__info">
+                        <div class="icon__wrapper">
+                            <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
+                                <UnplacedSvg />
+                            </div>
                         </div>
+                        <div class="project__type-title">Без проекта</div>
                     </div>
-                    <div class="project__type-title">Без проекта</div>
                 </div>
             </div>
         </div>
@@ -84,6 +90,15 @@ const taskStore = useTaskStore();
 }
 
 .project__type {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 4px;
+    padding: 2px;
+    position: relative;
+}
+
+.project__info {
     display: flex;
     align-items: center;
     border-radius: 5px;
