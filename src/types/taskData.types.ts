@@ -1,3 +1,5 @@
+export type PriorityUnion = 'low' | 'normal' | 'high';
+
 export interface TaskData {
     taskId: number;
     isOpenTask: boolean;
@@ -5,10 +7,14 @@ export interface TaskData {
     isFirstOpen: boolean;
     isCheckTask: boolean;
     checkTypeIncoming: boolean;
-    checkOpenTypeKinds: boolean;
-    isOpenTypeKindsFooter: boolean;
     date?: Date;
     isExpired?: boolean;
+    // из этого
+    isHighPriority: boolean;
+    isMidPriority: boolean;
+    isLowPriority: boolean;
+    //переделать на это
+    //priority: PriorityUnion;
 }
 
 export type TaskList = Map<number, TaskData>;

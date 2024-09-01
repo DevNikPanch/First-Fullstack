@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useTaskStore } from '../../stores/taskStore';
 import { TaskData } from '../../types/taskData.types';
-import TaskProject from './TaskProject.vue';
+import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
+import InboxSVG from '../SvgComponents/InboxSVG.vue';
+import SubMenu from './SubMenu.vue';
 
 const props = defineProps<{
     task: TaskData,
@@ -28,7 +30,7 @@ const taskStore = useTaskStore();
             </div>
             <div class="task-footer__item task-footer__item--0">
                 <div class="task-footer__item-action hover-help-info" id="calendar">
-                    <div class="icon-svg calendar " style="min-height: 16px; min-width: 16px;">
+                    <div class="icon-svg calendar" style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                 fill="none" class="injected-svg" data-src="resources/icons/calendar_16.svg"
@@ -68,7 +70,8 @@ const taskStore = useTaskStore();
                 </div>
             </div>
             <div class="task-footer__item task-footer__item--1">
-                <div class="task-footer__item-action hover-help-info" id="priority">
+                <div class="task-footer__item-action hover-help-info" id="priority"
+                    @click="taskStore.setHighPriority(task.taskId)">
                     <div class="icon-svg priority " style="min-height: 16px; min-width: 16px;">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
@@ -114,24 +117,52 @@ const taskStore = useTaskStore();
                 </div>
             </div>
             <div class="task-footer__item task-footer__item--2">
-                <div class="task-footer__item-action hover-help-info" id="mover" v-click-in-element="{
-                    onActive: () => taskStore.showTypesKindsFooter(task.taskId, true),
-                    onUnActive: () => taskStore.showTypesKindsFooter(task.taskId, false)
-                }">
-                    <div class="icon-svg mover " style="min-height: 16px; min-width: 16px;">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                fill="none" class="injected-svg" data-src="resources/icons/mover_16.svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M8.11353 1.0344C8.13602 1.04939 8.15531 1.06869 8.17031 1.09117L9.83477 3.58787C9.89748 3.68194 9.87207 3.80903 9.778 3.87174C9.74438 3.89415 9.70487 3.90611 9.66446 3.90611L9.02316 3.90564L9.02299 6.97605L12.0944 6.97621L12.0939 6.33552C12.0939 6.22247 12.1855 6.13083 12.2986 6.13083C12.339 6.13083 12.3785 6.14279 12.4121 6.1652L14.9088 7.82967C15.0029 7.89238 15.0283 8.01947 14.9656 8.11353C14.9506 8.13602 14.9313 8.15531 14.9088 8.1703L12.4121 9.83477C12.3181 9.89748 12.191 9.87206 12.1283 9.778C12.1058 9.74438 12.0939 9.70487 12.0939 9.66446L12.0944 9.02316L9.02299 9.02299L9.02316 12.0934L9.66446 12.0939C9.6914 12.0939 9.71794 12.0992 9.7426 12.1094L9.778 12.1283C9.85325 12.1784 9.88457 12.2698 9.86198 12.3525L9.83477 12.4121L8.17031 14.9088C8.15531 14.9313 8.13602 14.9506 8.11353 14.9656C8.03828 15.0158 7.9419 15.0095 7.87424 14.9569L7.82967 14.9088L6.16521 12.4121C6.14279 12.3785 6.13083 12.339 6.13083 12.2986C6.13083 12.2044 6.19447 12.125 6.28111 12.1012L6.33552 12.0939L6.97621 12.0934L6.97605 9.02299L3.90659 9.02316L3.90611 9.66446C3.90611 9.6914 3.9008 9.71794 3.89061 9.7426L3.87174 9.778C3.82157 9.85325 3.7302 9.88457 3.6475 9.86198L3.58788 9.83477L1.09117 8.1703C1.06869 8.15531 1.04939 8.13602 1.0344 8.11353C0.984233 8.03828 0.990467 7.9419 1.04313 7.87424L1.09117 7.82967L3.58788 6.1652C3.6215 6.14279 3.66101 6.13083 3.70142 6.13083C3.79563 6.13083 3.87497 6.19447 3.8988 6.2811L3.90611 6.33552L3.90659 6.97621L6.97605 6.97605L6.97621 3.90564L6.33552 3.90611C6.22247 3.90611 6.13083 3.81447 6.13083 3.70142C6.13083 3.66101 6.14279 3.6215 6.16521 3.58787L7.82967 1.09117C7.89238 0.997109 8.01947 0.971692 8.11353 1.0344Z"
-                                    fill="currentColor"></path>
-                            </svg>
+                <SubMenu>
+                    <template #trigger="{ onClick }">
+                        <div class="task-footer__item-action hover-help-info" id="mover" @click="onClick">
+                            <div class="icon-svg mover " style="min-height: 16px; min-width: 16px;">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                        fill="none" class="injected-svg" data-src="resources/icons/mover_16.svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M8.11353 1.0344C8.13602 1.04939 8.15531 1.06869 8.17031 1.09117L9.83477 3.58787C9.89748 3.68194 9.87207 3.80903 9.778 3.87174C9.74438 3.89415 9.70487 3.90611 9.66446 3.90611L9.02316 3.90564L9.02299 6.97605L12.0944 6.97621L12.0939 6.33552C12.0939 6.22247 12.1855 6.13083 12.2986 6.13083C12.339 6.13083 12.3785 6.14279 12.4121 6.1652L14.9088 7.82967C15.0029 7.89238 15.0283 8.01947 14.9656 8.11353C14.9506 8.13602 14.9313 8.15531 14.9088 8.1703L12.4121 9.83477C12.3181 9.89748 12.191 9.87206 12.1283 9.778C12.1058 9.74438 12.0939 9.70487 12.0939 9.66446L12.0944 9.02316L9.02299 9.02299L9.02316 12.0934L9.66446 12.0939C9.6914 12.0939 9.71794 12.0992 9.7426 12.1094L9.778 12.1283C9.85325 12.1784 9.88457 12.2698 9.86198 12.3525L9.83477 12.4121L8.17031 14.9088C8.15531 14.9313 8.13602 14.9506 8.11353 14.9656C8.03828 15.0158 7.9419 15.0095 7.87424 14.9569L7.82967 14.9088L6.16521 12.4121C6.14279 12.3785 6.13083 12.339 6.13083 12.2986C6.13083 12.2044 6.19447 12.125 6.28111 12.1012L6.33552 12.0939L6.97621 12.0934L6.97605 9.02299L3.90659 9.02316L3.90611 9.66446C3.90611 9.6914 3.9008 9.71794 3.89061 9.7426L3.87174 9.778C3.82157 9.85325 3.7302 9.88457 3.6475 9.86198L3.58788 9.83477L1.09117 8.1703C1.06869 8.15531 1.04939 8.13602 1.0344 8.11353C0.984233 8.03828 0.990467 7.9419 1.04313 7.87424L1.09117 7.82967L3.58788 6.1652C3.6215 6.14279 3.66101 6.13083 3.70142 6.13083C3.79563 6.13083 3.87497 6.19447 3.8988 6.2811L3.90611 6.33552L3.90659 6.97621L6.97605 6.97605L6.97621 3.90564L6.33552 3.90611C6.22247 3.90611 6.13083 3.81447 6.13083 3.70142C6.13083 3.66101 6.14279 3.6215 6.16521 3.58787L7.82967 1.09117C7.89238 0.997109 8.01947 0.971692 8.11353 1.0344Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <TaskProject :counter="task.taskId"
-                    :style="{ 'display': task.isOpenTypeKindsFooter ? 'block' : 'none' }" />
+                    </template>
+                    <template #body="{ onClick }">
+                        <div class="project__move">
+                            <input placeholder="Куда" type="text" class="project__move-inpt">
+                        </div>
+                        <div class="project__types">
+                            <div class="project__type"
+                                @click="taskStore.switchTypeProject(task.taskId, true), onClick()">
+                                <div class="project__info">
+                                    <div class="icon__wrapper">
+                                        <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
+                                            <InboxSVG />
+                                        </div>
+                                    </div>
+                                    <div class="project__type-title">Входящие</div>
+                                </div>
+                            </div>
+                            <div class="project__type"
+                                @click="taskStore.switchTypeProject(task.taskId, false), onClick()">
+                                <div class="project__info">
+                                    <div class="icon__wrapper">
+                                        <div class="icon-svg inbox" style="min-height: 24px; min-width: 24px;">
+                                            <UnplacedSvg />
+                                        </div>
+                                    </div>
+                                    <div class="project__type-title">Без проекта</div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </SubMenu>
                 <div class="task-footer__item-action hover-help-info" id="tag">
                     <div class="icon-svg tag " style="min-height: 16px; min-width: 16px;">
                         <div>
@@ -220,12 +251,12 @@ const taskStore = useTaskStore();
     background-color: #182137;
 }
 
-.task-footer__more:hover svg {
-    color: var(--icon-side-bar-color);
+.task-footer__more svg {
+    color: var(--text-gray-color);
 }
 
-.task-footer svg {
-    color: var(--text-gray-color);
+.task-footer__more:hover svg {
+    color: var(--icon-side-bar-color);
 }
 
 .icon-svg {
@@ -250,6 +281,10 @@ const taskStore = useTaskStore();
     margin-right: 8px;
     position: relative;
     width: 24px;
+}
+
+.task-footer__item-action .icon-svg {
+    color: var(--text-gray-color);
 }
 
 .task-footer__item-action:hover {

@@ -1,7 +1,9 @@
 /* Переменные */
 :root {
   --icon-side-bar-color: #2ebcff;
-  --text-gray-color: #76899b;
+  --text-gray-color: #75899b;
+  --high-priority-color: #dc576c;
+  --low-priority-color: #596175;
 }
 
 /* Основные стили */

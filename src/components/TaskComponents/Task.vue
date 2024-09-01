@@ -40,20 +40,21 @@ const editorSubTitle = new EditorJS({
     <div class="task" :class="{ 'selected': taskData?.isSelected }" @dblclick="taskStore.showTask(props.counter, true)"
         v-click-in-element="{
             onActive: () => taskStore.showSelected(props.counter, true),
-            onUnActive: () => { taskStore.showTask(props.counter, false); taskStore.showSelected(props.counter, false); }
+            onUnActive: () => { taskStore.showSelected(props.counter, false); }
         }">
         <div class="task__container">
             <div class=" task__wrapper" :style="{ 'background': taskData?.isOpenTask ? '#1c283e' : 'none' }">
                 <div class="task__form">
                     <div class="task__header">
-                        <div class="check-icon" style="min-height: 24px; min-width: 24px;">
+                        <div class="check-icon" style="min-height: 24px; min-width: 24px;"
+                            :style="{ 'color': taskData?.isHighPriority && !taskData.isCheckTask ? 'var(--high-priority-color)' : taskData?.isLowPriority ? 'var(--low-priority-color)' : 'var(--text-gray-color)' }">
                             <div class="check-border" @click="taskStore.checkTask(props.counter)">
                                 <div class="icon-svg">
                                     <CheckEmptySVG />
                                 </div>
                             </div>
                             <div class="check-inner-elem">
-                                <div class="icon-svg check-done" @click="taskStore.checkTask(props.counter)"
+                                <div class="icon-svg check-done" @click=" taskStore.checkTask(props.counter)"
                                     style="min-height: 24px; min-width: 24px;"
                                     :style="{ 'display': taskData?.isCheckTask ? 'flex' : 'none' }">
                                     <CheckDoneSVG />
@@ -61,14 +62,15 @@ const editorSubTitle = new EditorJS({
                             </div>
                         </div>
                         <div class="task__title">
-                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input">
+                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input"
+                                :style="{ 'font-weight': taskData?.isHighPriority ? 'bold' : '400', 'color': taskData?.isLowPriority ? 'var(--text-gray-color)' : '#fff' }">
                             </div>
                         </div>
                         <div class="task__note" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }">
                             <div :id="`editorjsSubTitle-${props.counter}`" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
-                    <TaskMiddlePart :task="taskData!" />
+                    <TaskMiddlePart :task="taskData!" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
                     <TaskFooter :task="taskData!" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
                 </div>
             </div>
@@ -130,7 +132,6 @@ const editorSubTitle = new EditorJS({
     position: absolute;
     left: -22px;
     margin-right: 5px;
-    color: var(--text-gray-color);
     flex-grow: 0;
     flex-shrink: 0;
     cursor: pointer;
@@ -192,5 +193,6 @@ const editorSubTitle = new EditorJS({
 
 .check-inner-elem .icon-svg {
     display: none;
+    color: var(--text-gray-color);
 }
 </style>

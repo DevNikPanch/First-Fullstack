@@ -17,14 +17,14 @@ export const useTaskStore = defineStore('taskStore', () => {
         countTasks.value = countTasks.value + 1;
         taskList.set(countTasks.value, {
             taskId: countTasks.value,
-
             isOpenTask: true,
             isSelected: false,
             isFirstOpen: true,
             isCheckTask: false,
             checkTypeIncoming: true,
-            checkOpenTypeKinds: false,
-            isOpenTypeKindsFooter: false,
+            isHighPriority: false,
+            isMidPriority: true,
+            isLowPriority: false,
         });
         return countTasks.value;
     };
@@ -69,30 +69,6 @@ export const useTaskStore = defineStore('taskStore', () => {
         });
     }
 
-    // Функция открытия и закрытия выбора типов
-    function showTypesKinds(taskId: number, show: boolean) {
-        const taskData = taskList.get(taskId);
-        if (taskData === undefined) return;
-
-        taskList.set(taskId, {
-            ...taskData,
-            checkOpenTypeKinds: show,
-        });
-    }
-
-    // Функция открытия и закрытия выбора типов подвала таски
-    function showTypesKindsFooter(taskId: number, show: boolean) {
-        const taskData = taskList.get(taskId);
-        if (taskData === undefined) return;
-
-        debugger;
-
-        taskList.set(taskId, {
-            ...taskData,
-            isOpenTypeKindsFooter: show,
-        });
-    }
-
     // Функция смена типа проекта
     function switchTypeProject(taskId: number, switcher: boolean) {
         const taskData = taskList.get(taskId);
@@ -104,6 +80,44 @@ export const useTaskStore = defineStore('taskStore', () => {
         });
     }
 
+    function setHighPriority(taskId: number) {
+        const taskData = taskList.get(taskId);
+        if (taskData === undefined) return;
+
+        taskList.set(taskId, {
+            ...taskData,
+            isHighPriority: true,
+            isMidPriority: false,
+            isLowPriority: false,
+        });
+    }
+
+    function setMidPriority(taskId: number) {
+        const taskData = taskList.get(taskId);
+        if (taskData === undefined) return;
+
+        taskList.set(taskId, {
+            ...taskData,
+            isHighPriority: false,
+            isMidPriority: true,
+            isLowPriority: false,
+        });
+    }
+
+    function setLowPriority(taskId: number) {
+        const taskData = taskList.get(taskId);
+        if (taskData === undefined) return;
+
+        debugger;
+
+        taskList.set(taskId, {
+            ...taskData,
+            isHighPriority: false,
+            isMidPriority: false,
+            isLowPriority: true,
+        });
+    }
+
     return {
         addTask,
         taskList,
@@ -111,8 +125,9 @@ export const useTaskStore = defineStore('taskStore', () => {
         showTask,
         showSelected,
         checkTask,
-        showTypesKinds,
-        showTypesKindsFooter,
         switchTypeProject,
+        setHighPriority,
+        setMidPriority,
+        setLowPriority,
     };
 });
