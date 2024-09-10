@@ -1,7 +1,7 @@
-<script setup lang="ts">import InboxSVG from '../SvgComponents/InboxSVG.vue';
-import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
-import RemoveSvg from '../SvgComponents/RemoveSvg.vue';
-import CalendarSVG from '../SvgComponents/CalendarSVG.vue';
+<script setup lang="ts">import InboxSVG from '../SideBar/SideBarSVG/InboxSVG.vue';
+import UnplacedSvg from '../SideBar/SideBarSVG/UnplacedSvg.vue';
+import RemoveSvg from '../SideBar/SideBarSVG/RemoveSvg.vue';
+import CalendarSVG from '../SideBar/SideBarSVG/CalendarSVG.vue';
 
 import { useTaskStore } from '../../stores/taskStore';
 import { TaskData } from '../../types/taskData.types';

@@ -2,9 +2,9 @@
 import { ref } from 'vue';
 import { showActiveItem } from '../../helpers/showActiveItem'
 import { SidebarItems } from '../../types/sideBarItems.types';
-import InboxSVG from '../SvgComponents/InboxSVG.vue'
-import StarSVG from '../SvgComponents/StarSVG.vue'
-import CalendarSVG from '../SvgComponents/CalendarSVG.vue'
+import InboxSVG from '../SideBar/SideBarSVG/InboxSVG.vue'
+import StarSVG from '../SideBar/SideBarSVG/StarSVG.vue'
+import CalendarSVG from '../SideBar/SideBarSVG/CalendarSVG.vue'
 
 defineProps<{
     subMenuItems: Array<String>,

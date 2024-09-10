@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import Task from '../TaskComponents/Task.vue';
 import { useTaskStore } from '../../stores/taskStore';
+import StarSVG from '../SideBar/SideBarSVG/StarSVG.vue';
+import ArrowDownSVG from './RouterComponentsSVG/ArrowDownSVG.vue';
+import SortBurgerSVG from './RouterComponentsSVG/SortBurgerSVG.vue';
+import TaskContainer from '../TaskComponents/TaskContainer.vue';
 
 const taskStore = useTaskStore();
 
@@ -13,15 +16,7 @@ const taskStore = useTaskStore();
                     <div class="router-header__title">
                         <div class="router-header__title-img">
                             <div class="icon-svg">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0.5 24 24"
-                                        fill="none" class="injected-svg" data-src="resources/icons/star_24.svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <path fill="currentColor"
-                                            d="M9.12647 8.46088L3.04787 8.46171L2.92918 8.46777C2.003 8.56364 1.64625 9.77342 2.43313 10.3414L7.35058 13.891L5.47256 19.6351L5.44262 19.7448C5.24389 20.6516 6.29385 21.3657 7.08199 20.7968L11.9995 17.2461L16.918 20.7968L17.0137 20.859C17.8204 21.327 18.8285 20.5556 18.5274 19.6351L16.6484 13.891L21.5669 10.3414L21.6593 10.2672C22.3519 9.64877 21.9248 8.46171 20.9521 8.46171L14.8725 8.46088L12.9947 2.71798C12.6816 1.76067 11.3184 1.76067 11.0053 2.71798L9.12647 8.46088ZM11.9995 6.40042L13.1186 9.82186L13.1631 9.93508C13.3321 10.3003 13.7014 10.5398 14.1133 10.5398L17.734 10.539L14.8046 12.6538L14.7011 12.7391C14.4103 13.0118 14.2987 13.4302 14.4247 13.8155L15.5429 17.2347L12.6147 15.122L12.5011 15.0505C12.1502 14.86 11.7152 14.8838 11.3853 15.122L8.45607 17.2347L9.57531 13.8155L9.60859 13.6861C9.68252 13.2956 9.52529 12.8919 9.19538 12.6538L6.26497 10.539L9.88671 10.5398C10.3398 10.5398 10.7414 10.25 10.8814 9.82186L11.9995 6.40042Z">
-                                        </path>
-                                    </svg>
-                                </div>
+                                <StarSVG />
                             </div>
                         </div>
                         <div class="router-header__title-text">Сегодня</div>
@@ -30,16 +25,7 @@ const taskStore = useTaskStore();
                         <div class="router-header__burger-btn-wrp hover-item">
                             <div class="router-header__burger-btn-sort hover-help-info" id="burger-filter">
                                 <div class="icon-svg">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" class="injected-svg"
-                                            data-src="resources/icons/sort_1_24.svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M18 17C18.5523 17 19 17.4477 19 18C19 18.5523 18.5523 19 18 19H6C5.44772 19 5 18.5523 5 18C5 17.4477 5.44772 17 6 17H18ZM16 11C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13H6C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11H16ZM20 5C20.5523 5 21 5.44772 21 6C21 6.55228 20.5523 7 20 7H6C5.44772 7 5 6.55228 5 6C5 5.44772 5.44772 5 6 5H20Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                    </div>
+                                    <SortBurgerSVG />
                                 </div>
                             </div>
                         </div>
@@ -52,8 +38,41 @@ const taskStore = useTaskStore();
                         планирование</div>
                     <button type="button" class="today__empty-btn">Смотреть видео</button>
                 </div>
-                <div v-for="index in taskStore.countTasks" :key="index">
-                    <Task :counter=index :typeIncoming=false />
+                <!-- <div class="task-group task-group--overdue">
+                    <div class="task-group__info">
+                        <div class="icon-wrapper">
+                            <div class="icon-svg star" style="min-height: 24px; min-width: 24px;">
+                                <StarSVG />
+                            </div>
+                        </div>
+                        <div class="task-group__info-title">Просроченные задачи</div>
+                        <div class="task-group__arrow">
+                            <div class="icon-svg arrow_down " style="min-height: 16px; min-width: 16px;">
+                                <ArrowDownSVG />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-group__list">
+                        <TaskContainer :typeProjectIncoming="false" />
+                    </div>
+                </div> -->
+                <div class="task-group task-group--relevant">
+                    <div class="task-group__info">
+                        <div class="icon-wrapper">
+                            <div class="icon-svg star" style="min-height: 24px; min-width: 24px;">
+                                <StarSVG />
+                            </div>
+                        </div>
+                        <div class="task-group__info-title">Сегодня</div>
+                        <div class="task-group__arrow">
+                            <div class="icon-svg arrow_down " style="min-height: 16px; min-width: 16px;">
+                                <ArrowDownSVG />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-group__list">
+                        <TaskContainer :typeProjectIncoming="false" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +99,6 @@ const taskStore = useTaskStore();
     justify-content: space-between;
     align-items: center;
     position: relative;
-    margin-bottom: 8px;
     margin-top: 0;
     padding: 0 0 0 6px;
 }
@@ -210,5 +228,77 @@ const taskStore = useTaskStore();
 .today__empty-btn:hover {
     background: #2384b9;
     opacity: .75;
+}
+
+/* Стилизация фильтрованных списков задач с датами */
+.task-group {
+    margin-top: 8px;
+}
+
+.task-group__info {
+    align-items: center;
+    display: flex;
+    height: 24px;
+    padding: 16px 0 16px 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.task-group__info::after {
+    border-top: 1px solid rgba(57, 59, 70, .5);
+    border-bottom: 1px solid rgba(57, 59, 70, .5);
+    bottom: -1px;
+    content: "";
+    left: -52px;
+    pointer-events: none;
+    position: absolute;
+    right: -52px;
+    top: 0;
+}
+
+.tas .task-group__info:hover::before {
+    border-radius: 5px;
+    bottom: 14px;
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: -6px;
+    top: 14px;
+    background-color: #1d2b4d;
+}
+
+.task-group__info .icon-wrapper {
+    left: -36px;
+    position: absolute;
+    padding-right: 10px;
+    color: var(--text-gray-color);
+}
+
+.task-group__info-title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+.task-group__arrow {
+    position: relative;
+    margin-left: auto;
+    opacity: .5;
+    transition: opacity .1s linear;
+    flex-shrink: 0;
+    color: var(--text-gray-color);
+}
+
+.task-group__arrow .icon-svg {
+    transform: rotate(0deg);
+    transition: transform .4s ease;
+}
+
+.task-group__list {
+    margin: 12px 0;
+    min-height: 24px;
 }
 </style>

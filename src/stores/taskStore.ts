@@ -8,6 +8,8 @@ export const useTaskStore = defineStore('taskStore', () => {
 
     const taskList: TaskList = reactive(new Map());
 
+    const activeTask = ref<number>(0);
+
     // const expiredTasks = computed(() => {
     //     // TODO filtering current task list by date and date now for get expired tasks
     //     return new Map()
@@ -17,47 +19,17 @@ export const useTaskStore = defineStore('taskStore', () => {
         countTasks.value = countTasks.value + 1;
         taskList.set(countTasks.value, {
             taskId: countTasks.value,
-            isOpenTask: true,
-            isSelected: false,
-            isFirstOpen: true,
             isCheckTask: false,
             checkTypeIncoming: true,
             isHighPriority: false,
             isMidPriority: true,
             isLowPriority: false,
         });
+
+        activeTask.value = countTasks.value;
+
         return countTasks.value;
     };
-
-    function showTask(taskId: number, show: boolean) {
-        const taskData = taskList.get(taskId);
-        if (taskData === undefined) return;
-
-        taskList.set(taskId, {
-            ...taskData,
-            isFirstOpen: taskData.isFirstOpen ? false : taskData.isFirstOpen,
-            isSelected: show ? false : taskData.isSelected,
-            isOpenTask: show,
-        });
-    }
-
-    function showSelected(taskId: number, show: boolean) {
-        const taskData = taskList.get(taskId);
-        if (taskData === undefined) return;
-
-        if (taskData.isOpenTask === true) {
-            taskList.set(taskId, {
-                ...taskData,
-                isSelected: false,
-            });
-            return;
-        }
-
-        taskList.set(taskId, {
-            ...taskData,
-            isSelected: show,
-        });
-    }
 
     function checkTask(taskId: number) {
         const taskData = taskList.get(taskId);
@@ -122,8 +94,7 @@ export const useTaskStore = defineStore('taskStore', () => {
         addTask,
         taskList,
         countTasks,
-        showTask,
-        showSelected,
+        activeTask,
         checkTask,
         switchTypeProject,
         setHighPriority,

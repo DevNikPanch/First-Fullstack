@@ -2,9 +2,6 @@ export type PriorityUnion = 'low' | 'normal' | 'high';
 
 export interface TaskData {
     taskId: number;
-    isOpenTask: boolean;
-    isSelected: boolean;
-    isFirstOpen: boolean;
     isCheckTask: boolean;
     checkTypeIncoming: boolean;
     date?: Date;

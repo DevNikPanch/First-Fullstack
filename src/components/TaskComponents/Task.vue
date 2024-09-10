@@ -6,21 +6,31 @@ import CheckEmptySVG from './TaskSVG/CheckEmptySVG.vue';
 import CheckDoneSVG from './TaskSVG/CheckDoneSVG.vue';
 import { useTaskStore } from '../../stores/taskStore';
 import { computed } from 'vue';
+import { TaskData } from '../../types/taskData.types';
 
 
 const props = defineProps<{
-    counter: number,
-    typeIncoming: boolean
+    typeIncoming: boolean,
+    taskData: TaskData,
+    isSelected: boolean,
+    isShowed: boolean,
 }>()
+
+
+const emit = defineEmits<{
+    (e: "onClickTask", taskId: number): void
+    (e: "onDblClickTask", taskId: number): void
+}>();
+
 
 const taskStore = useTaskStore();
 
 const taskData = computed(() => {
-    return taskStore.taskList.get(props.counter)
+    return props.taskData
 });
 
 const editorTitle = new EditorJS({
-    holder: `editorjsTitle-${props.counter}`,
+    holder: `editorjsTitle-${taskData.value.taskId}`,
     placeholder: 'Новая задача',
     minHeight: 0,
     autofocus: true,
@@ -28,50 +38,55 @@ const editorTitle = new EditorJS({
 })
 
 const editorSubTitle = new EditorJS({
-    holder: `editorjsSubTitle-${props.counter}`,
+    holder: `editorjsSubTitle-${taskData.value.taskId}`,
     placeholder: 'Заметка',
     minHeight: 0,
     autofocus: false,
     readOnly: false
 })
 
+const taskClickHandler = () => {
+    emit("onClickTask", taskData.value.taskId)
+}
+
+const taskDblClickHandler = () => {
+    emit("onDblClickTask", taskData.value.taskId)
+}
+
 </script>
 <template>
-    <div class="task" :class="{ 'selected': taskData?.isSelected }" @dblclick="taskStore.showTask(props.counter, true)"
-        v-click-in-element="{
-            onActive: () => taskStore.showSelected(props.counter, true),
-            onUnActive: () => { taskStore.showSelected(props.counter, false); }
-        }">
-        <div class="task__container">
-            <div class=" task__wrapper" :style="{ 'background': taskData?.isOpenTask ? '#1c283e' : 'none' }">
+    <div class="task" :class="{ 'selected': props.isShowed ? false : props.isSelected }" @click="taskClickHandler"
+        @dblclick="taskDblClickHandler">
+        <div class=" task__container">
+            <div class=" task__wrapper" :style="{ 'background': props.isShowed ? '#1c283e' : 'none' }">
                 <div class="task__form">
                     <div class="task__header">
                         <div class="check-icon" style="min-height: 24px; min-width: 24px;"
-                            :style="{ 'color': taskData?.isHighPriority && !taskData.isCheckTask ? 'var(--high-priority-color)' : taskData?.isLowPriority ? 'var(--low-priority-color)' : 'var(--text-gray-color)' }">
-                            <div class="check-border" @click="taskStore.checkTask(props.counter)">
+                            :style="{ 'color': taskData.isHighPriority && !taskData.isCheckTask ? 'var(--high-priority-color)' : taskData.isLowPriority ? 'var(--low-priority-color)' : 'var(--text-gray-color)' }">
+                            <div class="check-border" @click="taskStore.checkTask(taskData.taskId)">
                                 <div class="icon-svg">
                                     <CheckEmptySVG />
                                 </div>
                             </div>
                             <div class="check-inner-elem">
-                                <div class="icon-svg check-done" @click=" taskStore.checkTask(props.counter)"
+                                <div class="icon-svg check-done" @click=" taskStore.checkTask(taskData.taskId)"
                                     style="min-height: 24px; min-width: 24px;"
-                                    :style="{ 'display': taskData?.isCheckTask ? 'flex' : 'none' }">
+                                    :style="{ 'display': taskData.isCheckTask ? 'flex' : 'none' }">
                                     <CheckDoneSVG />
                                 </div>
                             </div>
                         </div>
                         <div class="task__title">
-                            <div :id="`editorjsTitle-${props.counter}`" class="task__title-wrapper-input"
-                                :style="{ 'font-weight': taskData?.isHighPriority ? 'bold' : '400', 'color': taskData?.isLowPriority ? 'var(--text-gray-color)' : '#fff' }">
+                            <div :id="`editorjsTitle-${taskData.taskId}`" class="task__title-wrapper-input"
+                                :style="{ 'font-weight': taskData.isHighPriority ? 'bold' : '400', 'color': taskData.isLowPriority ? 'var(--text-gray-color)' : '#fff' }">
                             </div>
                         </div>
-                        <div class="task__note" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }">
-                            <div :id="`editorjsSubTitle-${props.counter}`" class="task__title-wrapper-input"></div>
+                        <div class="task__note" :style="{ 'display': props.isShowed ? 'block' : 'none' }">
+                            <div :id="`editorjsSubTitle-${taskData.taskId}`" class="task__title-wrapper-input"></div>
                         </div>
                     </div>
-                    <TaskMiddlePart :task="taskData!" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
-                    <TaskFooter :task="taskData!" :style="{ 'display': taskData?.isOpenTask ? 'block' : 'none' }" />
+                    <TaskMiddlePart :task="taskData!" :style="{ 'display': props.isShowed ? 'block' : 'none' }" />
+                    <TaskFooter :task="taskData!" :style="{ 'display': props.isShowed ? 'block' : 'none' }" />
                 </div>
             </div>
         </div>

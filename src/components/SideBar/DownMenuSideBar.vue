@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { showActiveItem } from '../../helpers/showActiveItem'
-import UnplacedSvg from '../SvgComponents/UnplacedSvg.vue';
+import UnplacedSvg from '../SideBar/SideBarSVG/UnplacedSvg.vue';
 </script>
 <template>
     <div class="side-bar-footer">
